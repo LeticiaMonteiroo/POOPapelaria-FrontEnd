@@ -1,14 +1,14 @@
 <template> 
     <header>
       <h1 class="tituloHeader" @click="goToHome">
-        <span class="text-unb"><\UnB</span><span class= "text-Connect">Connect></span>
+        <span class="text-unb">Papelaria</span><span class= "text-Connect">Lale</span>
       </h1> 
   
       <nav class="header-nav">
         <ul>
-          <li class="header-nav-li" @click="goToFluxo">Meu Fluxo</li>
-          <li class="header-nav-li" @click="goToDisciplinas">Disciplinas</li>
-          <li class="header-nav-li" @click="goToForum">Fórum</li>
+          <li class="header-nav-li" @click="goToFluxo">Produtos</li>
+          <li class="header-nav-li" @click="goToDisciplinas">Tutoriais</li>
+          <li class="header-nav-li" @click="goToForum">Avaliações</li>
         </ul>
       </nav>
   
@@ -64,9 +64,9 @@ export default {
 
 <style scoped> 
 header {
-  background-color: #ffffff;
+  background-color: #720372;
   padding: 2px 50px;
-  color: #0b0fdb;
+  color: #cb6ce6;
   bottom: 0;
   left: 0;
   display: flex;
@@ -79,20 +79,20 @@ header {
 }
 
 .text-unb{
-  color:#091f77;;
+  color: #cb6ce6;;
   font-size: 36px;
 }
 
 .header-account-view-img:hover{
-  background-color:#031664;
+  background-color: #cb6ce6;
 }
 
 .header-logout-img:hover{
-  background-color:#024d22;
+  background-color:#f4d016;
 
 }
 .text-Connect{
-  color:#009942;
+  color:#f4d016;
   font-size: 36px;
 }
 
@@ -148,7 +148,7 @@ header {
     height: 40px;
     padding: 10px;
     cursor: pointer;
-    background-color: #160094; /* Background azul */
+    background-color: #cb6ce6; /* Background azul */
     border-radius: 10px; /* Border radius para fazer cantos arredondados */
   }
   
@@ -160,7 +160,7 @@ header {
     height: 40px;
     padding: 10px;
     cursor: pointer;
-    background-color: #009942; /* Background azul */
+    background-color: #f4d016; /* Background azul */
     border-radius: 10px; /* Border radius para fazer cantos arredondados */
   }
 </style> 
