@@ -1,23 +1,22 @@
 <template>
     <HeaderComponent/>
 
-    <div id="informacao">
-        <div id="sobre">
-            <h2 class="center-text">Seu espaço para encontrar as  <span class="azul">ferramentas</span> que trazem suas ideias à vida!</h2>
-        </div>
-        <div id="foto">
-            <img src="../assets/tela.png">
-        </div>
-    </div>
+<div class="informacao">
+    <h2 class="text">Seu espaço para encontrar as ferramentas que trazem suas ideias à vida!</h2>
+</div>
+
+<div id="foto">
+    <img src="../assets/ImagemTela1.png">
+</div>
 
     <div class="Espaço">
         Espaço
-     </div>
+    </div>
         
     <div id="servico">
         <div class="container">
             <h1> Destaques </h1>
-             <div class="Espaço1"></div>
+
             <div class="content">
                 <div class="card">
                     <h2>Variedade</h2>
@@ -110,6 +109,20 @@ export default {
 </script>
 
 <style>
+
+.informacao {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 100px;
+}
+
+.text {
+    align-items: center;
+}
+
+
+
 .container {
     width: 100%;
     min-height: 100vh; /* Garantir que a altura mínima seja 100% da altura da viewport */
@@ -120,7 +133,6 @@ export default {
     align-items: center;
     justify-content: center;
     color: #f4d016;
-   
 }
 
 .Espaço{
@@ -136,7 +148,6 @@ export default {
     padding: 50px 0;
     color: #ffffff;
 }
-
 
 .container2 {
     width: 100%;
@@ -210,12 +221,7 @@ export default {
     color: #10162F;
 }
 
-#informacao {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 100px;
-}
+
 
 #sobre h2 {
     margin-top: -350px;
@@ -236,13 +242,13 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 700px;
+    height: 100px;
 }
 
 #foto img {
-    height: auto;
-    margin-bottom: -150px;
-    margin-left: -1200px;
+    height: 100px;
+
+    overflow-x: hidden;
 }
 
 #comunidade {
