@@ -2,7 +2,7 @@
    <div class="containerLogin">
     <div class="left-panel">
       <h1 class="titulo">
-        <span class="text-UnB">UnB</span><span class="text-Connect">Connect</span>
+        <span class="text-UnB">Papelaria</span><span class="text-Connect">Lale</span>
       </h1>
     </div>
     <div class="right-panel">
@@ -24,7 +24,7 @@
           <router-link to="/cadastro" class="entrar-link">Cadastre-se</router-link>
         </p>
       </form>
-      <img src="/src/assets/unb-logo.png" alt="Logo UnB" class="unb-logo">
+      <img src="/src/assets/NovoIcon.ico" alt="Logo UnB" class="unb-logo">
     </div>
   </div>
 
@@ -103,16 +103,17 @@ export default {
 }
 
 .left-panel h1 {
-  color: #008137;
+  color: #f4d016;
   font-size: 100px;
 }
 
 .text-UnB {
-  color: #001f4d;
+  color: #720372;
 }
 
+
 .left-panel p {
-  color: #4B0082;
+  color: #f3da5d;
   font-size: 14px;
 }
 
@@ -129,7 +130,7 @@ export default {
 /* Painel Direito */
 .right-panel {
   flex: 1;
-  background-color: #021565;
+  background-color: #cb6ce6;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -139,7 +140,7 @@ export default {
 }
 
 .right-panel h3 {
-  color: white;
+  color: #f3da5d;
   margin-top: 0;
   margin-bottom: 40px;
   font-size: 24px;
@@ -168,7 +169,7 @@ export default {
 
 /* Estilo do botão "Entrar" */
 .login-form .btn-entrar {
-  background-color: #28a745; /* Verde */
+  background-color: #720372; 
   color: white;
   font-weight: bold;
   cursor: pointer;
@@ -201,7 +202,7 @@ export default {
 }
 
 .forgot-password:hover {
-  color: #7cfc70; /* Verde escuro */
+  color: yellow; 
 }
 
 
@@ -214,7 +215,7 @@ export default {
 }
 
 .cadastro-page a {
-  color: #7cfc70;
+  color: #f4d016;
   text-decoration: none;
 }
 
@@ -226,7 +227,7 @@ export default {
   top: 0;
   bottom: 0;
   width: 5px;
-  background-color: white;
+  background-color: #cb6ce6;
 }
 
 /* Responsividade */

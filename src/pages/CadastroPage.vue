@@ -2,7 +2,7 @@
   <div class="container">
     <div class="left-panel">
       <h1 class="titulo">
-        <span class="text-UnB">UnB</span><span class="text-Connect">Connect</span>
+        <span class="text-UnB">Papelaria</span><span class="text-Connect">Lale</span>
       </h1>
     </div>
     <div class="right-panel">
@@ -125,12 +125,12 @@ body {
 }
 
 .left-panel h1 {
-  color: #008137;
+  color: #f4d016;
   font-size: 100px;
 }
 
 .text-UnB {
-  color: #001f4d;
+  color: #720372;
 }
 
 .left-panel p {
@@ -151,7 +151,7 @@ body {
 /* Painel Direito */
 .right-panel {
   flex: 1;
-  background-color: #021565;
+  background-color:  #cb6ce6;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -161,7 +161,7 @@ body {
 }
 
 .right-panel h3 {
-  color: white;
+  color: #f4d016;
   margin-top: 0;
   margin-bottom: 40px;
   font-size: 24px;
@@ -198,7 +198,7 @@ body {
 
 /* Botão Cadastrar */
 .cadastro-form .btn-cadastrar {
-  background-color: #28a745; /* Verde */
+  background-color: #720372;
   color: white;
   font-weight: bold;
   cursor: pointer;
@@ -207,11 +207,11 @@ body {
 }
 
 .cadastro-form .btn-cadastrar:hover {
-  background-color: #0f551e; /* Verde mais escuro ao passar o mouse */
+  background-color: #400246;; /* Verde mais escuro ao passar o mouse */
 }
 
 .cadastro-form .btn-cadastrar:active {
-  background-color: #1e7e34; /* Verde ainda mais escuro ao clicar */
+  background-color: #400246; /* Verde ainda mais escuro ao clicar */
   transform: translateY(2px); /* Efeito de clique */
 }
 
@@ -219,7 +219,7 @@ body {
 .separator {
   width: 100%;
   height: 1px;
-  background-color: white;
+  background-color: yellow;
   margin: 20px 0;
 }
 
@@ -232,13 +232,13 @@ body {
 }
 
 .Login-page a {
-  color: #7cfc70;
+  color: yellow;
   text-decoration: none;
 }
 
 /* Estilo específico para o link 'Entrar' */
 .entrar-link {
-  color: #28a745; /* Verde */
+  color: #28a745; 
   text-decoration: none;
 }
 
@@ -250,7 +250,7 @@ body {
   top: 0;
   bottom: 0;
   width: 5px;
-  background-color: white;
+  background-color:  #cb6ce6;
 }
 
 /* Responsividade */
