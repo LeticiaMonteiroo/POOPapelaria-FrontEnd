@@ -1,6 +1,16 @@
 <template>
   <HeaderComponent/>
 
+  <!-- Modal de aviso -->
+  <div v-if="showModal" class="modal-overlay">
+    <div class="modal">
+      <h2>Bem-vindo à seleção de vídeos</h2>
+      <p>Aqui você pode pesquisar e assistir a vídeos relacionados a diversas matérias. Use a barra de pesquisa para encontrar o vídeo que deseja.</p>
+      <button @click="closeModal">OK</button>
+    </div>
+  </div>
+
+  <!-- Conteúdo principal -->
   <div class="containerDisciplina">
     <!-- Container da barra de pesquisa e botão de pesquisa -->
     <div class="search-filter-container">
@@ -9,13 +19,13 @@
         class="form-control search-bar" 
         placeholder="Pesquise aqui..." 
         v-model="searchQuery"
-        list="disciplinasList"
+        list="videoList"
       />
-      <datalist id="disciplinasList">
+      <datalist id="videoList">
         <option 
-          v-for="disciplina in disciplinasList" 
-          :key="disciplina.code" 
-          :value="disciplina.name"
+          v-for="video in filteredItems" 
+          :key="video.code" 
+          :value="video.name"
         ></option>
       </datalist>
       <button class="search-button" @click="performSearch">
@@ -23,107 +33,176 @@
       </button>
     </div>
 
-    <!-- Conteúdo do site com múltiplas disciplinas -->
-    <div class="contentDisciplina">
+    <!-- Conteúdo dos vídeos -->
+    <div class="contentVideo">
       <div 
-        v-for="(disciplina, index) in filteredDisciplinas" 
-        :key="index" 
-        class="row align-items-center justify-content-between mb-4"
+        v-for="video in filteredItems" 
+        :key="video.code" 
+        class="video-container"
       >
-        <!-- Seção de informações da disciplina e botão -->
-        <div class="col-auto info-section">
-          <div class="info-header">
-            <p class="code">{{ disciplina.code }}</p>
-            <div class="discipline-name">{{ disciplina.name }}</div>
-            <p class="professor-name">{{ disciplina.professor }}</p>
-          </div>
+        <div class="video-left">
+          <iframe 
+            :src="video.link" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen
+          ></iframe>
         </div>
-
-        <button class="btn btn-view-evaluation" @click="goToDetalheDisciplina(disciplina.id)">Ver avaliação Geral</button>
+        <div class="video-right">
+          <h3 v-html="highlightText(video.name)"></h3>
+          <p v-html="highlightText(video.description)"></p>
+          <p><strong>Materiais:</strong> <span v-html="highlightText(video.subject)"></span></p>
+        </div>
       </div>
     </div>
   </div>
+
+  <FooterComponent/>
 </template>
 
 <script>
-import axios from 'axios';
-
 import HeaderComponent from '../components/HeaderComponent.vue';
-import FooterComponet from '../components/FooterComponent.vue';
+import FooterComponent from '../components/FooterComponent.vue';
 
 export default {
   components: {
     HeaderComponent,
-    FooterComponet
+    FooterComponent
   },
 
-  name: 'Disciplinas',
   data() {
     return {
       searchQuery: '',
-      disciplinasList: [],
-      disciplinasMock: [
-        {
-          name: 'Matemática Discreta 1',
-          rating: 5,
-          code: 'MATH101'
+      showModal: true, // Controla a exibição do modal
+      items: [
+        { 
+          name: 'Bullet Journal 2024', 
+          code: '001', 
+          link: 'https://www.youtube.com/embed/hUX2Ray8CLY',
+          description: 'Aprenda a criar seu Bullet Journal.',
+          subject: 'Caderno Leuchtturm1917, Canetas fineliners Sakura Pigma Micron, Canetas coloridas Staedtler, Marcadores Tombow, Adesivos Pipsticks, Régua de acrílico, Carimbos de borracha, Washi tape.'
         },
-        {
-          name: 'Física Experimental',
-          rating: 4,
-          code: 'PHYS102'
+        { 
+          name: 'Novidades do Mercado Internacional - Mês de Setembro', 
+          code: '002', 
+          link: 'https://www.youtube.com/embed/iGVelNVMOn8',
+          description: 'Descubra as últimas novidades do mercado internacional.',
+          subject: 'Cadernos Leuchtturm1917, Canetas Pigma Micron, Marcadores Tombow Dual Brush, Washi tape MT, Papéis adesivos Moleskine, Lápis Coloridos Prismacolor, Apontadores KUM, Corretores de fita Tombow.'
         },
-        {
-          name: 'Desenvolvimento de Software',
-          rating: 3,
-          code: 'CHEM103'
+        { 
+          name: 'Aula de Pintura Iniciantes', 
+          code: '003', 
+          link: 'https://www.youtube.com/embed/EgIJGPodLJA',
+          description: 'Curso básico de pintura para iniciantes.',
+          subject: 'Tintas Winsor & Newton, Papel Canson Montval 300g/m², Pincéis Da Vinci, Paleta Masterson'
         },
-        {
-          name: 'Desenvolvimento de Software',
-          rating: 3,
-          code: 'CHEM103'
+        { 
+          name: 'Ranking das Melhores Canetas de Tons Roxos', 
+          code: '004', 
+          link: 'https://www.youtube.com/embed/X8KZ6UrQKuM',
+          description: 'Veja as melhores canetas de tons roxos no mercado.',
+          subject: 'Sketchbook, Prismacolor Col-Erase Pencil, Winsor and Newton Brush Marker, Prismacolor Premier Pencil, Aquarel Watercolor Pencil #57, Zig Writer, Metallic Gelly Roll Pen, Chalkola Marker, Koh-I-Nor Progresso Pencil, Stabilo Point 88, Tombow Brush Pen.'
+        },
+        { 
+          name: 'Criando com Conforto: Aquarelas e Marcadores em Ação', 
+          code: '005', 
+          link: 'https://www.youtube.com/embed/n2otT7dax-E',
+          description: 'Explorando técnicas com aquarelas e marcadores.',
+          subject: 'Prismacolor Premier Pencil Caran Ache Luminance, Aquarel Watercolor Pencil #57 Faber-Castell Albrecht Dürer, Zig Writer Uni Pin, Metallic Gelly Roll Pen Sakura Gelly Roll, Chalkola Marker Arteza'
         },
       ]
-    }
+    };
   },
+
   computed: {
-    filteredDisciplinas() {
-      return this.disciplinasList.filter(disciplina => 
-        disciplina.name.toLowerCase().includes(this.searchQuery.toLowerCase()) || 
-        disciplina.code.toLowerCase().includes(this.searchQuery.toLowerCase())
+    filteredItems() {
+      if (this.searchQuery === '') {
+        return this.items;
+      }
+      const query = this.searchQuery.toLowerCase();
+      return this.items.filter(video => 
+        video.name.toLowerCase().includes(query) || 
+        video.code.toLowerCase().includes(query) ||
+        video.description.toLowerCase().includes(query) ||
+        video.subject.toLowerCase().includes(query)
       );
     }
   },
 
-  async mounted () {
-    await this.getDisciplinaList()
-  },
-
   methods: {
-    goToDetalheDisciplina(id) {
-      this.$router.push({ name: 'Detalhe Disciplina', params: { disciplina_id: id } });
-    },
-    
     performSearch() {
-      // Ação para realizar a pesquisa
-      // Aqui não precisamos de lógica adicional já que usamos o computed
       console.log(`Pesquisa realizada: ${this.searchQuery}`);
     },
+    closeModal() {
+      this.showModal = false;
+    },
+    highlightText(text) {
+      if (!this.searchQuery) return text;
 
-    async getDisciplinaList() {
-      try {
-        const token = localStorage.getItem('token')
-        const response = await axios.get('http://localhost:8000/api/subject/', { headers: { authorization:`Token ${token}` } });
-
-        this.disciplinasList = response.data
-
-      } catch (err) {}
+      const regex = new RegExp(`(${this.searchQuery.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+      return text.replace(regex, '<mark>$1</mark>');
     }
   }
 }
 </script>
 
 <style scoped>
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  max-width: 500px;
+  width: 80%;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.modal h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.modal p {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.modal button {
+  background-color: #11067a;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.modal button:hover {
+  background-color: #0d0563;
+}
+
+/* Estilo para a marcação de destaque */
+mark {
+  background-color: yellow;
+  color: black;
+  padding: 0.2em;
+  border-radius: 3px;
+}
+
+/* Restante do seu CSS */
 .containerDisciplina {
   background-color: #fff;
   border-radius: 8px;
@@ -146,11 +225,12 @@ export default {
   padding: 15px;
   font-size: 16px;
   border-radius: 10px;
-  border: 1px solid #11067a;
+  border: 1px solid #cb6ce6;
+  
 }
 
 .search-button {
-  background-color: #11067a;
+  background-color:  #cb6ce6;
   border: none;
   border-radius: 10px;
   padding: 15px;
@@ -164,77 +244,43 @@ export default {
   height: 20px;
 }
 
-.contentDisciplina {
+.contentVideo {
   margin-top: 20px;
 }
 
-.row {
+.video-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #e0e0e0;
-  padding-bottom: 15px;
-  margin-bottom: 15px;
+  background-color: rgba(255, 255, 0, 0.103);
+  border-radius: 8px;
+  box-shadow: 0 0 10px  #4002462f;
+  padding: 20px;
+  margin-bottom: 20px;
 }
 
-.info-section {
-  display: flex;
-  flex-direction: column;
+.video-left {
+  flex: 1;
 }
 
-.info-header {
-  display: flex;
-  align-items: center;
+.video-right {
+  flex: 1;
+  padding-left: 20px;
 }
 
-.code {
-  font-size: 12px;
-  color: #888;
-  min-width: 70px;
-  margin-right: 10px; /* Espaçamento à direita da checkbox */
+.video-container h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
 }
 
-.discipline-name {
-  font-size: 24px;
-  color: #333;
+.video-container p {
+  margin: 5px 0;
 }
 
-.professor-name {
-  font-size: 14px;
-  color: #0066cc;
-  margin-top: 5px;
-}
-
-.btn-view-evaluation {
-  background-color: #28a745;
-  color: #fff;
+iframe {
+  width: 100%;
+  height: 250px; /* Altura aumentada */
+  border-radius: 8px;
   border: none;
-  padding: 10px 15px;
-  font-size: 14px;
-  border-radius: 5px;
-  align-self: flex-end; /* Move the button to the right */
-  cursor: pointer
-}
-
-.rating-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.star-rating {
-  font-size: 24px;
-  color: #a1a09b;
-}
-
-.star-rating .star {
-  margin-right: 2px;
-}
-
-.rating-label {
-  font-size: 14px;
-  color: #666;
-  text-align: center;
-  margin-bottom: 5px;
 }
 </style>

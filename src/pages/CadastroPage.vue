@@ -207,7 +207,7 @@ body {
 }
 
 .cadastro-form .btn-cadastrar:hover {
-  background-color: #400246;; /* Verde mais escuro ao passar o mouse */
+  background-color: #400246;; 
 }
 
 .cadastro-form .btn-cadastrar:active {

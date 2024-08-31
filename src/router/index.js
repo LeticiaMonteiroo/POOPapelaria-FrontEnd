@@ -12,7 +12,7 @@ const router = createRouter({
       path: '/forum',
       name: 'Forum',
       component: () => import('../pages/ForumPage.vue'),
-      meta: { requiresAuth: true }
+      //meta: { requiresAuth: true }
     },
     {
       path: '/login',
@@ -28,49 +28,49 @@ const router = createRouter({
       path: '/disciplinas',
       name: 'Disciplina',
       component: () => import('../pages/PageDisciplina.vue'),
-      meta: { requiresAuth: true }
+      //meta: { requiresAuth: true }
     },
     {
       path: '/recuperar',
       name: 'Recuperar',
       component: () => import('../pages/LoginRecuperar.vue'),
-      meta: { requiresAuth: true }
+      //meta: { requiresAuth: true }
     },
     {
       path: '/perfil/:user_id',
       name: 'Perfil',
       component: () => import('../pages/PerfilPage.vue'),
-      meta: { requiresAuth: true }
+      //meta: { requiresAuth: true }
     },
     {
       path: '/adicionar',
       name: 'Adicionar Post',
       component: () => import('../pages/AdicionarPage.vue'),
-      meta: { requiresAuth: true }
+      //meta: { requiresAuth: true }
     },
     {
       path: '/feedback/:disciplina_id',
       name: 'Feedback',
       component: () => import('../pages/FeedbackPage.vue'),
-      meta: { requiresAuth: true }
+      //meta: { requiresAuth: true }
     },
     {
       path: '/detalhe-disciplina/:disciplina_id',
       name: 'Detalhe Disciplina',
       component: () => import('../pages/DetalheDisciplinaPage.vue'),
-      meta: { requiresAuth: true }
+      //meta: { requiresAuth: true }
     },
     {
       path: '/selecao',
       name: 'Seleção',
       component: () => import('../pages/SelecaoMaterias.vue'),
-      meta: { requiresAuth: true }
+      //meta: { requiresAuth: true }
     },
     {
       path: '/fluxo',
       name: 'Meu Fluxo',
       component: () => import('../pages/MeuFluxoPage.vue'),
-      meta: { requiresAuth: true }
+      //meta: { requiresAuth: true }
     }
   ]
 })
