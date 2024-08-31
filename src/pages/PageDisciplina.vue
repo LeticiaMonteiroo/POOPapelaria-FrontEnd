@@ -4,8 +4,8 @@
   <!-- Modal de aviso -->
   <div v-if="showModal" class="modal-overlay">
     <div class="modal">
-      <h2>Bem-vindo à seleção de vídeos</h2>
-      <p>Aqui você pode pesquisar e assistir a vídeos relacionados a diversas matérias. Use a barra de pesquisa para encontrar o vídeo que deseja.</p>
+      <h2>Bem-vindo ao Mural Criativo</h2>
+      <p>Aqui estão vídeos selecionados para te inspirar a criar com os produtos que você encontra na nossa loja.</p>
       <button @click="closeModal">OK</button>
     </div>
   </div>
@@ -181,7 +181,7 @@ export default {
 }
 
 .modal button {
-  background-color: #11067a;
+  background-color: #cb6ce6;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -191,7 +191,7 @@ export default {
 }
 
 .modal button:hover {
-  background-color: #0d0563;
+  background-color:  #720372;
 }
 
 /* Estilo para a marcação de destaque */
