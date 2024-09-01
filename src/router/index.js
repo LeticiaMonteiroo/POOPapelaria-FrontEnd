@@ -54,6 +54,14 @@ const router = createRouter({
       component: () => import('../pages/FeedbackPage.vue'),
       //meta: { requiresAuth: true }
     },
+
+
+    {
+      path: '/produto/:id',
+      name: 'ProdutoDetalhes',
+      component: () => import('../pages/ProductDetails.vue'),
+    },
+    
     {
       path: '/detalhe-disciplina/:disciplina_id',
       name: 'Detalhe Disciplina',
@@ -61,9 +69,9 @@ const router = createRouter({
       //meta: { requiresAuth: true }
     },
     {
-      path: '/selecao',
-      name: 'Seleção',
-      component: () => import('../pages/SelecaoMaterias.vue'),
+      path: '/produtos',
+      name: 'Produtos',
+      component: () => import('../pages/Produtos.vue'),
       //meta: { requiresAuth: true }
     },
     {

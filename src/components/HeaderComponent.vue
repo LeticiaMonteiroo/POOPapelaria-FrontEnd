@@ -8,7 +8,7 @@
         <ul>
           <li class="header-nav-li" @click="goToFluxo">Produtos</li>
           <li class="header-nav-li" @click="goToDisciplinas">Tutoriais</li>
-          <li class="header-nav-li" @click="goToForum">Avaliações</li>
+          <li class="header-nav-li" @click="goToForum">Eventos</li>
         </ul>
       </nav>
   

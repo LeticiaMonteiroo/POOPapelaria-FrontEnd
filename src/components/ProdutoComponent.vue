@@ -1,4 +1,4 @@
-<template> 
+<template>
   <div class="produto">
     <h2 class="produto-nome">Produto: {{ nome }}</h2>
     <div class="produto-codigo">Código: {{ codigo }}</div>
@@ -8,7 +8,7 @@
     <div class="produto-estoque">Estoque: {{ estoque }} unidades</div>
   </div>
 </template>
- 
+
 <script>
 import { defineComponent } from 'vue';
 
@@ -21,7 +21,7 @@ export default defineComponent({
     descricao: String,
     categoria: String,
     estoque: Number
-  },
+  }
 });
 </script>
 
