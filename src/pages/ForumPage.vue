@@ -1,196 +1,192 @@
 <template>
-    <section>
-      <HeaderComponent/>
-      
-      <div class="forum-page">
-        <div class="div-list-posts">
-          <div v-for="postagem in postagensLista" :key="postagem.id">
-            <PostComponent 
-              :title="postagem.title" 
-              :description="postagem.description" 
-              :link="postagem.link" 
-              :imgSrc="postagem.imgSrc"
-              :user="postagem.user"
-              :user_name="postagem.user_name"/>
-          </div>
+  <section>
+    <HeaderComponent/>
 
-          <span v-if="postagensLista.length == 0 && !error">Não existe Postagens no momento.</span>
-          <span v-if="error">Erro ao listar as Postagens, tente novamente mais tarde.</span>
+    
+
+    <!-- Conteúdo principal -->
+    <div class="containerDisciplina">
+      <!-- Container de serviços -->
+      <div class="services-container">
+        <div 
+          v-for="item in services" 
+          :key="item.code" 
+          class="service-container"
+        >
+          <div class="service-left">
+            <div class="service-square">
+              <p>{{ item.title }}</p>
+            </div>
+          </div>
+          <div class="service-right">
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.description }}</p>
+            <p><strong>Materiais:</strong> {{ item.materials }}</p>
+          </div>
         </div>
       </div>
-    
-    <div class="button-container">
-      <button class="click-button" @click="goToAdicionarPost">
-        <span>Nova Postagem</span>
-        <div class="plus-icon"></div>
-      </button>
     </div>
 
-    <FooterComponet />
+    <FooterComponent/>
   </section>
 </template>
 
 <script>
-import axios from 'axios';
-import { ref, defineComponent } from 'vue';
-import PostComponent from '../components/PostComponent.vue';
 import HeaderComponent from '../components/HeaderComponent.vue';
-import FooterComponet from '../components/FooterComponent.vue';
+import FooterComponent from '../components/FooterComponent.vue';
 
-export default defineComponent({
+export default {
   components: {
-    PostComponent,
     HeaderComponent,
-    FooterComponet
+    FooterComponent
   },
 
   data() {
     return {
-      error: null,
-      postagensLista: [],
-      postagens: [
-        {
-          id: '2',
-          title: 'Engenharia de Software Telegram',
-          description: 'Grupo formado pelos estudantes de software da FGA.',
-          link: 'https://web.telegram.org/a/#-1001383799472',
+      showModal: true, // Controla a exibição do modal
+      services: [
+        { 
+          title: 'Convites Personalizados', 
+          code: '001', 
+          description: 'Personalizamos os convites para seu evento especial do jeito que quiser.',
+          materials: 'Papéis personalizados, Envelopes decorados, Etiquetas adesivas, Fitas e Laços, Carimbos personalizados.'
         },
-        {
-          id: '3',
-          title: '1.24 PIBIC e PIBEX @UnBConnect',
-          description: 'Grupo para informes sobre PIBIC e PIBEX',
-          link: 'bbbbbbbbb'
+        { 
+          title: 'Planejadores e Agendas', 
+          code: '002', 
+          description: 'Crie planejadores e agendas personalizados para organizar seu ano com estilo.',
+          materials: 'Cadernos com capa personalizada, Marcadores de página, Adesivos decorativos, Canetas coloridas, Régua.'
         },
-        {
-          id: '4',
-          title: 'Cardápio RU',
-          description: 'Cardápio de Manhã, Tarde e Noite do Restaurante Universitário.',
-          link: 'cccccccccc'
+        { 
+          title: 'Rótulos e Etiquetas', 
+          code: '003', 
+          description: 'Produzimos rótulos e etiquetas para qualquer necessidade, com designs únicos.',
+          materials: 'Papéis adesivos, Impressão personalizada, Cortes especiais, Laminados protetores.'
         },
-        {
-          id: '5',
-          title: 'Reinvindicações FGA',
-          description: 'Grupo formado pelos estudantes da FGA para reivindicar melhorias para o campus',
-          link: 'aaaaaaaaaaaa'
+        { 
+          title: 'Cartões de Visita', 
+          code: '004', 
+          description: 'Desenvolvemos cartões de visita profissionais que refletem sua marca.',
+          materials: 'Papéis de alta gramatura, Acabamento fosco ou brilhante, Laminação, Corte personalizado.'
         },
-        {
-          id: '6',
-          title: 'Guardiões da Saúde',
-          description: 'Grupo de Informes da Disciplina',
-          link: 'bbbbbbbbb'
-        },
-        {
-          id: '7',
-          title: 'UNB - FGA 2024/1',
-          description: 'Grupo formado por calouros da FGA 2024.1',
-          link: 'cccccccccc'
-        },
-        {
-          id: '8',
-          title: 'Mural da FGA',
-          description: 'Grupo de informes da FGA, aqui vamos postar notícias, vagas de estágio, processos seletivos ou qualquer outra coisa relevante para os alunos!',
-          link: 'bbbbbbbbb'
-        },
-        {
-          id: '9',
-          title: 'Comunidade GNU/Linux - UnB',
-          description: 'Grupo para trocar informações sobre o sistema operacional Linux',
-          link: 'cccccccccc'
+        { 
+          title: 'Brindes Personalizados', 
+          code: '005', 
+          description: 'Oferecemos uma ampla gama de brindes personalizados para eventos e campanhas.',
+          materials: 'Canecas, Canetas, Blocos de anotações, Bolsas, Pendrives, Etiquetas personalizadas.'
         },
       ]
     };
   },
 
-  async mounted () {
-    await this.getPostList()
-  },
-
   methods: {
-    goToAdicionarPost() {
-      this.$router.push({ name: 'Adicionar Post' });
-    },
-
-    async getPostList() {
-      try {
-        const token = localStorage.getItem('token')
-        const response = await axios.get('http://localhost:8000/api/post/', { headers: { authorization:`Token ${token}` } });
-
-        this.postagensLista = response.data
-
-      } catch (err) {
-        this.error = 'erro'
-      }
+    closeModal() {
+      this.showModal = false;
     }
-  },
-});
+  }
+}
 </script>
 
 <style scoped>
-.forum-page {
-  flex: 1;
-  margin-top: 100px;
-}
-
-.div-list-posts {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-}
-
-.button-container {
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
   display: flex;
   justify-content: center;
-  margin-top: 20px;
-  margin-bottom: 70px;
+  align-items: center;
+  z-index: 1000;
 }
 
-.click-button {
+.modal {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  max-width: 500px;
+  width: 80%;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.modal h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.modal p {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.modal button {
+  background-color: #cb6ce6;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.modal button:hover {
+  background-color: #720372;
+}
+
+.containerDisciplina {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  max-width: 1100px;
+  margin: 20px auto;
+}
+
+.services-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.service-container {
   display: flex;
   align-items: center;
-  padding: 20px 40px;
-  border: none;
-  border-radius: 50px;
-  background-color: #ffffff;
-  box-shadow: 0 0 10px rgba(0, 0, 255, 0.2);
-  cursor: pointer;
-  transition: box-shadow 0.3s ease;
-  position: relative;
+  background-color: rgba(255, 255, 0, 0.103);
+  border-radius: 8px;
+  box-shadow: 0 0 10px  #4002462f;
+  padding: 20px;
 }
 
-.click-button span {
-  font-size: 24px;
-  font-weight: bold;
-  color: #091f77;
-  margin-right: 20px;
+.service-left {
+  flex: 1;
 }
 
-.plus-icon {
-  width: 24px;
-  height: 24px;
-  position: relative;
+.service-square {
+  width: 150px;
+  height: 150px;
+  background-color: #cb6ce6;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  font-size: 18px;
+  text-align: center;
 }
 
-.plus-icon::before,
-.plus-icon::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 24px;
-  height: 4px;
-  background-color: #091f77;
-  border-radius: 50px;
+.service-right {
+  flex: 2;
+  padding-left: 20px;
 }
 
-.plus-icon::before {
-  transform: translate(-50%, -50%) rotate(90deg);
+.service-right h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
 }
 
-.plus-icon::after {
-  transform: translate(-50%, -50%);
-}
-
-.click-button:hover {
-  box-shadow: 0 0 20px rgba(0, 0, 255, 0.4);
+.service-right p {
+  margin: 5px 0;
 }
 </style>
