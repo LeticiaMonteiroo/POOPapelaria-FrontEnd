@@ -8,7 +8,7 @@
         <ul>
           <li class="header-nav-li" @click="goToFluxo">Produtos</li>
           <li class="header-nav-li" @click="goToDisciplinas">Tutoriais</li>
-          <li class="header-nav-li" @click="goToForum">Eventos</li>
+          <li class="header-nav-li" @click="goToForum">Serviços</li>
         </ul>
       </nav>
   
@@ -123,7 +123,7 @@ header {
   }
   
   .header-nav-li:hover {
-    background-color: #e0e0e0;
+    background-color: rgba(0, 0, 0, 0.1);
     border-radius: 10px;
   }
   
