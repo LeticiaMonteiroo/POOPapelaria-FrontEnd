@@ -44,7 +44,6 @@ export default {
     goToProdutos() {
   this.$router.push({ name: 'Produtos' });
    },
-
     goToServico() {
       this.$router.push({ name: 'Serviços' });
     },
