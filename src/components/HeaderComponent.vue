@@ -6,7 +6,7 @@
   
       <nav class="header-nav">
         <ul>
-          <li class="header-nav-li" @click="goToFluxo">Produtos</li>
+          <li class="header-nav-li" @click="goToProdutos">Produtos</li>
           <li class="header-nav-li" @click="goToDisciplinas">Tutoriais</li>
           <li class="header-nav-li" @click="goToForum">Eventos</li>
         </ul>
@@ -38,8 +38,8 @@ export default {
     goToHome() {
       this.$router.push({ name: 'Home' });
     },
-    goToFluxo() {
-      this.$router.push({ name: 'Meu Fluxo' });
+    goToProdutos() {
+      this.$router.push({ name: 'Produtos' });
     },
     goToDisciplinas() {
       this.$router.push({ name: 'Disciplina' });
