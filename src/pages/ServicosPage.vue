@@ -2,10 +2,11 @@
   <section>
     <HeaderComponent/>
 
-    
+   
 
     <!-- Conteúdo principal -->
     <div class="containerDisciplina">
+      <div class="container-selecao-title">Qualidade Garantida & Satisfação Completa!</div>
       <!-- Container de serviços -->
       <div class="services-container">
         <div 
@@ -101,6 +102,15 @@ export default {
   z-index: 1000;
 }
 
+.container-selecao-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #720372;
+  text-align: center;
+  font-weight: 600;
+  justify-content: center;
+}
+
 .modal {
   background-color: #fff;
   padding: 20px;
@@ -164,7 +174,7 @@ export default {
 }
 
 .service-square {
-  width: 150px;
+  width: 350px;
   height: 150px;
   background-color: #cb6ce6;
   color: white;

@@ -6,9 +6,9 @@
   
       <nav class="header-nav">
         <ul>
-          <li class="header-nav-li" @click="goToFluxo">Produtos</li>
-          <li class="header-nav-li" @click="goToDisciplinas">Tutoriais</li>
-          <li class="header-nav-li" @click="goToForum">Serviços</li>
+          <li class="header-nav-li" @click="goToProdutos">Produtos</li>
+          <li class="header-nav-li" @click="goToMural">Mural</li>
+          <li class="header-nav-li" @click="goToServico">Serviços</li>
         </ul>
       </nav>
   
@@ -38,14 +38,15 @@ export default {
     goToHome() {
       this.$router.push({ name: 'Home' });
     },
-    goToFluxo() {
-      this.$router.push({ name: 'Meu Fluxo' });
+    goToMural() {
+      this.$router.push({ name: 'Mural' });
     },
-    goToDisciplinas() {
-      this.$router.push({ name: 'Disciplina' });
-    },
-    goToForum() {
-      this.$router.push({ name: 'Forum' });
+    goToProdutos() {
+  this.$router.push({ name: 'Produtos' });
+   },
+
+    goToServico() {
+      this.$router.push({ name: 'Serviços' });
     },
     goToPerfil() {
       this.$router.push({ name: 'Perfil', params: { user_id: localStorage.getItem('user_id') } });
