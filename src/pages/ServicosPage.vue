@@ -2,11 +2,10 @@
   <section>
     <HeaderComponent/>
 
-   
-
     <!-- Conteúdo principal -->
     <div class="containerDisciplina">
       <div class="container-selecao-title">Qualidade Garantida & Satisfação Completa!</div>
+      
       <!-- Container de serviços -->
       <div class="services-container">
         <div 
@@ -16,7 +15,8 @@
         >
           <div class="service-left">
             <div class="service-square">
-              <p>{{ item.title }}</p>
+              <!-- Adicionando a imagem do serviço -->
+              <img :src="item.image" :alt="item.title" class="service-image" />
             </div>
           </div>
           <div class="service-right">
@@ -44,46 +44,44 @@ export default {
 
   data() {
     return {
-      showModal: true, // Controla a exibição do modal
       services: [
         { 
           title: 'Convites Personalizados', 
           code: '001', 
           description: 'Personalizamos os convites para seu evento especial do jeito que quiser.',
-          materials: 'Papéis personalizados, Envelopes decorados, Etiquetas adesivas, Fitas e Laços, Carimbos personalizados.'
+          materials: 'Papéis personalizados, Envelopes decorados, Etiquetas adesivas, Fitas e Laços, Carimbos personalizados.',
+          image: 'https://i.pinimg.com/564x/c8/20/5c/c8205c4b409ec64762a580d04d736697.jpg' // Link para a imagem do serviço
         },
         { 
           title: 'Planejadores e Agendas', 
           code: '002', 
           description: 'Crie planejadores e agendas personalizados para organizar seu ano com estilo.',
-          materials: 'Cadernos com capa personalizada, Marcadores de página, Adesivos decorativos, Canetas coloridas, Régua.'
+          materials: 'Cadernos com capa personalizada, Marcadores de página, Adesivos decorativos, Canetas coloridas, Régua.',
+          image: 'https://i.pinimg.com/564x/8a/c9/52/8ac952739a482ea372c76457a6fe65c4.jpg' // Link para a imagem do serviço
         },
         { 
           title: 'Rótulos e Etiquetas', 
           code: '003', 
           description: 'Produzimos rótulos e etiquetas para qualquer necessidade, com designs únicos.',
-          materials: 'Papéis adesivos, Impressão personalizada, Cortes especiais, Laminados protetores.'
+          materials: 'Papéis adesivos, Impressão personalizada, Cortes especiais, Laminados protetores.',
+          image: 'https://i.pinimg.com/564x/ac/36/ac/ac36ace09a4c5340d07896fae5437316.jpg' // Link para a imagem do serviço
         },
         { 
           title: 'Cartões de Visita', 
           code: '004', 
           description: 'Desenvolvemos cartões de visita profissionais que refletem sua marca.',
-          materials: 'Papéis de alta gramatura, Acabamento fosco ou brilhante, Laminação, Corte personalizado.'
+          materials: 'Papéis de alta gramatura, Acabamento fosco ou brilhante, Laminação, Corte personalizado.',
+          image: 'https://i.pinimg.com/564x/74/f1/8f/74f18f9da2ad8d5d53f26155df9103f1.jpg' // Link para a imagem do serviço
         },
         { 
           title: 'Brindes Personalizados', 
           code: '005', 
           description: 'Oferecemos uma ampla gama de brindes personalizados para eventos e campanhas.',
-          materials: 'Canecas, Canetas, Blocos de anotações, Bolsas, Pendrives, Etiquetas personalizadas.'
-        },
+          materials: 'Canecas, Canetas, Blocos de anotações, Bolsas, Pendrives, Etiquetas personalizadas.',
+          image: 'https://i.pinimg.com/736x/2f/1f/13/2f1f13e3c59e9034c375b6ca943961b0.jpg' // Link para a imagem do serviço
+        }
       ]
     };
-  },
-
-  methods: {
-    closeModal() {
-      this.showModal = false;
-    }
   }
 }
 </script>
@@ -109,40 +107,6 @@ export default {
   text-align: center;
   font-weight: 600;
   justify-content: center;
-}
-
-.modal {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  text-align: center;
-  max-width: 500px;
-  width: 80%;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-}
-
-.modal h2 {
-  font-size: 24px;
-  margin-bottom: 10px;
-}
-
-.modal p {
-  font-size: 16px;
-  margin-bottom: 20px;
-}
-
-.modal button {
-  background-color: #cb6ce6;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-.modal button:hover {
-  background-color: #720372;
 }
 
 .containerDisciplina {
@@ -176,7 +140,7 @@ export default {
 .service-square {
   width: 350px;
   height: 150px;
-  background-color: #cb6ce6;
+  background-color: #ede9ee;
   color: white;
   display: flex;
   align-items: center;
@@ -184,6 +148,18 @@ export default {
   border-radius: 8px;
   font-size: 18px;
   text-align: center;
+  position: relative;
+}
+
+.service-image {
+  width: 350px; /* Controla o tamanho da imagem */
+  height: 150px; /* Controla o tamanho da imagem */
+  /* object-fit: contain; /* Garante que a imagem seja ajustada proporcionalmente */
+  position: absolute;
+  border-radius: 10px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .service-right {
