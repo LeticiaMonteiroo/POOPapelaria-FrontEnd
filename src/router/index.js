@@ -10,7 +10,7 @@ const router = createRouter({
     },
     {
       path: '/servicos',
-      name: 'Serviços',
+      name: 'Servicos',
       component: () => import('../pages/ServicosPage.vue'),
       // Descomente se deseja que essa rota exija autenticação
       //meta: { requiresAuth: true }
@@ -43,12 +43,8 @@ const router = createRouter({
     {
       path: '/produtos',
       name: 'Produtos',
-      component: () => import('../pages/ProdutosPage.vue')
-    },
-    {
-      path: '/produto/:id',
-      name: 'Detalhe',
-      component: () => import('../pages/ProdutosDetalhes.vue')
+      component: () => import('../pages/Produtos.vue'),
+      //meta: { requiresAuth: true }
     }
   ]
 })

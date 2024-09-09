@@ -1,167 +1,166 @@
 <template> 
-    <header>
-      <h1 class="tituloHeader" @click="goToHome">
-        <span class="text-unb">Papelaria</span><span class= "text-Connect">Lale</span>
-      </h1> 
-  
-      <nav class="header-nav">
-        <ul>
-          <li class="header-nav-li" @click="goToProdutos">Produtos</li>
-          <li class="header-nav-li" @click="goToMural">Mural</li>
-          <li class="header-nav-li" @click="goToServico">Serviços</li>
-        </ul>
-      </nav>
-  
-      <div class="header-account-actions">
-        <div v-if="user_name != null" class="header-account-view">
-          <span class="header-account-view-span">{{ user_name }}</span>
-          <img class="header-account-view-img" src="../assets/account.png" @click="goToPerfil">
-        </div>
-        <div class="header-logout">
-          <img class="header-logout-img" src="../assets/logout.png" @click="logoutAccount">
-        </div>
+  <header>
+    <h1 class="tituloHeader" @click="goToHome">
+      <span class="text-unb">Papelaria</span><span class= "text-Connect">Lale</span>
+    </h1> 
+
+    <nav class="header-nav">
+      <ul>
+        <li class="header-nav-li" @click="goToProdutos">Produtos</li>
+        <li class="header-nav-li" @click="goToTutoriais">Tutoriais</li>
+        <li class="header-nav-li" @click="goToServicos">Serviços</li>
+      </ul>
+    </nav>
+
+    <div class="header-account-actions">
+      <div v-if="user_name != null" class="header-account-view">
+        <span class="header-account-view-span">{{ user_name }}</span>
+        <img class="header-account-view-img" src="../assets/account.png" @click="goToPerfil">
       </div>
-    </header>
+      <div class="header-logout">
+        <img class="header-logout-img" src="../assets/logout.png" @click="logoutAccount">
+      </div>
+    </div>
+  </header>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      user_name: null
-    };
+data() {
+  return {
+    user_name: null
+  };
+},
+mounted() {
+  this.user_name = localStorage.getItem('user_name')
+},
+methods: {
+  goToHome() {
+    this.$router.push({ name: 'Home' });
   },
-  mounted() {
-    this.user_name = localStorage.getItem('user_name')
+  goToProdutos() {
+    this.$router.push({ name: 'Produtos' });
   },
-  methods: {
-    goToHome() {
-      this.$router.push({ name: 'Home' });
-    },
-    goToMural() {
-      this.$router.push({ name: 'Mural' });
-    },
-    goToProdutos() {
-  this.$router.push({ name: 'Produtos' });
-   },
+  goToTutoriais() {
+    this.$router.push({ name: 'Mural' });
+  },
+  goToServicos() {
+    this.$router.push({ name: 'Servicos' });
+  },
+  goToPerfil() {
+    this.$router.push({ name: 'Perfil', params: { user_id: localStorage.getItem('user_id') } });
+  },
+  async logoutAccount() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user_id');
+    localStorage.removeItem('user_name');
+    localStorage.removeItem('user_email');
 
-    goToServico() {
-      this.$router.push({ name: 'Serviços' });
-    },
-    goToPerfil() {
-      this.$router.push({ name: 'Perfil', params: { user_id: localStorage.getItem('user_id') } });
-    },
-    async logoutAccount() {
-      localStorage.removeItem('token');
-      localStorage.removeItem('user_id');
-      localStorage.removeItem('user_name');
-      localStorage.removeItem('user_email');
-
-      this.$router.push({ name: 'Login' });
-    }
-  },
+    this.$router.push({ name: 'Login' });
+  }
+},
 }
 </script>
 
 <style scoped> 
 header {
-  background-color: #720372;
-  padding: 2px 50px;
-  color: #cb6ce6;
-  bottom: 0;
-  left: 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+background-color: #720372;
+padding: 2px 50px;
+color: #cb6ce6;
+bottom: 0;
+left: 0;
+display: flex;
+align-items: center;
+justify-content: space-between;
 }
 
 .tituloHeader {
-  cursor: pointer;
+cursor: pointer;
 }
 
 .text-unb{
-  color: #cb6ce6;;
-  font-size: 36px;
+color: #cb6ce6;;
+font-size: 36px;
 }
 
 .header-account-view-img:hover{
-  background-color: #cb6ce6;
+background-color: #cb6ce6;
 }
 
 .header-logout-img:hover{
-  background-color:#f4d016;
+background-color:#f4d016;
 
 }
 .text-Connect{
-  color:#f4d016;
-  font-size: 36px;
+color:#f4d016;
+font-size: 36px;
 }
 
-  
-  /* .header-logo{
-  }
-   */
-  .header-nav {
-    display: flex;
-    justify-content: end; /* Alinha os itens do nav para a direita */
-    align-items: center; /* Centraliza verticalmente os itens */
-  }
-  
-  ul {
-    display: flex;
-    flex-direction: row;
-    gap: 50px; /* Ajusta a separação entre cada item da barra de navegação */
-    list-style-type: none; /* Remove os marcadores de lista padrão */
-    margin: 0;
-    padding: 0;
-  }
-  
-  .header-nav-li {
-    padding: 15px;
-    font-size: 20px;
-    font-weight: 500;
-    cursor: pointer;
-  }
-  
-  .header-nav-li:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-  }
-  
-  .header-account-actions {
-    display: flex;
-    align-items: center;
-  }
-  
-  .header-account-view {
-    display: flex;
-    margin-right: 30px;
-  }
-  
-  .header-account-view-span {
-    display: flex;
-    align-items: center;
-    margin-right: 10px;
-    font-size: 16px;
-  }
-  
-  .header-account-view-img {
-    height: 40px;
-    padding: 10px;
-    cursor: pointer;
-    background-color: #cb6ce6; /* Background azul */
-    border-radius: 10px; /* Border radius para fazer cantos arredondados */
-  }
-  
-  .header-logout {
-    display: flex;
-  }
-  
-  .header-logout-img {
-    height: 40px;
-    padding: 10px;
-    cursor: pointer;
-    background-color: #f4d016; /* Background azul */
-    border-radius: 10px; /* Border radius para fazer cantos arredondados */
-  }
-</style> 
+
+/* .header-logo{
+}
+ */
+.header-nav {
+  display: flex;
+  justify-content: end; /* Alinha os itens do nav para a direita */
+  align-items: center; /* Centraliza verticalmente os itens */
+}
+
+ul {
+  display: flex;
+  flex-direction: row;
+  gap: 50px; /* Ajusta a separação entre cada item da barra de navegação */
+  list-style-type: none; /* Remove os marcadores de lista padrão */
+  margin: 0;
+  padding: 0;
+}
+
+.header-nav-li {
+  padding: 15px;
+  font-size: 20px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.header-nav-li:hover {
+  background-color: #e0e0e0;
+  border-radius: 10px;
+}
+
+.header-account-actions {
+  display: flex;
+  align-items: center;
+}
+
+.header-account-view {
+  display: flex;
+  margin-right: 30px;
+}
+
+.header-account-view-span {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+  font-size: 16px;
+}
+
+.header-account-view-img {
+  height: 40px;
+  padding: 10px;
+  cursor: pointer;
+  background-color: #cb6ce6; /* Background azul */
+  border-radius: 10px; /* Border radius para fazer cantos arredondados */
+}
+
+.header-logout {
+  display: flex;
+}
+
+.header-logout-img {
+  height: 40px;
+  padding: 10px;
+  cursor: pointer;
+  background-color: #f4d016; /* Background azul */
+  border-radius: 10px; /* Border radius para fazer cantos arredondados */
+}
+</style>
