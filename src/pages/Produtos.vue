@@ -42,7 +42,7 @@ export default defineComponent({
           descricao: 'Caderno espiral 200 folhas, capa dura com design moderno.',
           categoria: 'Papelaria',
           estoque: 50,
-          imagem: 'https://via.placeholder.com/260'
+          imagem: 'https://cdnv2.moovin.com.br/marbig/imagens/produtos/original/caderno-espiral-capa-dura-universitario-1-materia-zip-preto-80-folhas-img-199485_3008240519028644.jpg'
         },
         {
           nome: 'Caneta Esferográfica',
