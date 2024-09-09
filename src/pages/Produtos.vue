@@ -1,124 +1,165 @@
 <template>
-  <div>
-    <HeaderComponent />
-    <div class="containerSelecao">
-      <div class="container-selecao-title">Qualidade Garantida & Satisfação Completa!</div>
+  <section>
+    <HeaderComponent/>
 
-      <div class="contentSelecao">
-        <router-link
-          v-for="(produto, index) in produtos"
-          :key="index"
-          :to="{ name: 'ProdutoDetalhes', params: { id: produto.codigo } }"
-          class="produto-card"
+    <!-- Conteúdo principal -->
+    <div class="produtos-container">
+      <div class="container-selecao-title">Sua criatividade começa aqui!</div>
+
+      <!-- Container de produtos -->
+      <div class="produtos-grid">
+        <div 
+          class="produto-item" 
+          v-for="produto in produtos" 
+          :key="produto.id"
+          @click="goToDetalhes(produto.id)"
         >
-          <img :src="produto.imagem" alt="Imagem do produto" class="produto-imagem" />
-          <div class="produto-nome">{{ produto.nome }}</div>
-        </router-link>
+          <div class="produto-info">
+            <h3>{{ produto.nome }}</h3>
+            <div class="foto-container">
+              <img :src="`/assets/${produto.imagem}`" :alt="produto.nome" />
+            </div>
+            <p class="avaliacoes">{{ produto.avaliacoes }} Avaliações</p>
+            <p class="preco">{{ produto.preco }}</p>
+          </div>
+        </div>
       </div>
     </div>
 
-    <FooterComponent />
-  </div>
+    <FooterComponent/>
+  </section>
 </template>
 
 <script>
-import { defineComponent } from 'vue';
 import HeaderComponent from '../components/HeaderComponent.vue';
 import FooterComponent from '../components/FooterComponent.vue';
 
-export default defineComponent({
+export default {
+  name: 'ProdutosPage',
   components: {
     HeaderComponent,
     FooterComponent
   },
-  name: 'Loja',
   data() {
     return {
       produtos: [
         {
-          nome: 'Caderno Espiral',
-          codigo: '001',
-          preco: 'R$ 19,90',
-          descricao: 'Caderno espiral 200 folhas, capa dura com design moderno.',
-          categoria: 'Papelaria',
-          estoque: 50,
-          imagem: 'https://cdnv2.moovin.com.br/marbig/imagens/produtos/original/caderno-espiral-capa-dura-universitario-1-materia-zip-preto-80-folhas-img-199485_3008240519028644.jpg'
+          id: 1,
+          nome: 'Caneta Esferográfica Compactor -JET LUX- Mentos c/4 cores',
+          preco: 'R$ 11,99',
+          avaliacoes: '45',
+          imagem: 'Canetas1Mentos.jpeg' // Nome do arquivo na pasta public/assets
         },
         {
-          nome: 'Caneta Esferográfica',
-          codigo: '002',
-          preco: 'R$ 2,50',
-          descricao: 'Caneta esferográfica azul de ponta fina, ideal para escrita suave.',
-          categoria: 'Papelaria',
-          estoque: 200,
-          imagem: 'https://via.placeholder.com/260'
+          id: 2,
+          nome: 'Caderno Universitário - 10 Matérias',
+          preco: 'R$ 29,99',
+          avaliacoes: '30',
+          imagem: 'caderno-universitario.png' // Nome do arquivo na pasta public/assets
         },
         {
-          nome: 'Mochila Escolar',
-          codigo: '003',
-          preco: 'R$ 120,00',
-          descricao: 'Mochila escolar resistente, com vários compartimentos.',
-          categoria: 'Acessórios',
-          estoque: 30,
-          imagem: 'https://via.placeholder.com/260'
-        }
+          id: 3,
+          nome: 'Mochila Escolar - Preto',
+          preco: 'R$ 89,99',
+          avaliacoes: '20',
+          imagem: 'mochila-escolar.png' // Nome do arquivo na pasta public/assets
+        },
+        {
+          id: 4,
+          nome: 'Caneta Esferográfica Compactor -JET LUX- Mentos c/4 cores',
+          preco: 'R$ 11,99',
+          avaliacoes: '45',
+          imagem: 'mais-vendido-caneta-mentos.png' // Nome do arquivo na pasta public/assets
+        },
+        {
+          id: 5,
+          nome: 'Caderno Universitário - 10 Matérias',
+          preco: 'R$ 29,99',
+          avaliacoes: '30',
+          imagem: 'caderno-universitario.png' // Nome do arquivo na pasta public/assets
+        },
+        {
+          id: 6,
+          nome: 'Mochila Escolar - Preto',
+          preco: 'R$ 89,99',
+          avaliacoes: '20',
+          imagem: 'mochila-escolar.png' // Nome do arquivo na pasta public/assets
+        },
+        // Adicione mais produtos aqui
       ]
     };
+  },
+  methods: {
+    goToDetalhes(id) {
+      this.$router.push({ name: 'DetalhesProduto', params: { produtoId: id } });
+    }
   }
-});
+};
 </script>
 
 <style scoped>
-.containerSelecao {
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  max-width: 1140px;
-  margin: 20px auto;
-}
-
 .container-selecao-title {
   font-size: 24px;
   margin-bottom: 20px;
   color: #720372;
   text-align: center;
   font-weight: 600;
-  justify-content: center;
 }
 
-.contentSelecao {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: space-between;
-}
-
-.produto-card {
-  background-color: #f9f9f9;
+.produtos-container {
+  background-color: #fff;
   border-radius: 8px;
-  padding: 10px;
-  width: calc(30.333% - 20px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  max-width: 1100px;
+  margin: 20px auto;
+}
+
+.produtos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 produtos por linha */
+  gap: 20px;
+}
+
+.produto-item {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
   text-align: center;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  height: 300px; /* Aumentei a altura para 300px */
-  text-decoration: none; /* Remove o sublinhado dos links */
-  color: inherit; /* Herda a cor do texto do pai */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer; /* Indicando que é clicável */
+  transition: transform 0.3s ease;
 }
 
-.produto-card:hover {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Adiciona um efeito de hover */
+.produto-item:hover {
+  transform: scale(1.05); /* Efeito de zoom ao passar o mouse */
 }
 
-.produto-imagem {
-  max-width: 100%;
-  border-radius: 4px;
+.foto-container {
+  margin: 20px 0; /* Espaçamento acima e abaixo da imagem */
 }
 
-.produto-nome {
+.foto-container img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.texto-produto h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.texto-produto .avaliacoes {
+  font-size: 14px;
+  color: #5a849f;
+  margin-bottom: 5px;
+}
+
+.texto-produto .preco {
   font-size: 16px;
-  margin-top: 10px;
-  font-weight: 500;
-  color: rgb(4, 4, 53);
+  font-weight: bold;
+  color: #4B0082;
 }
 </style>
