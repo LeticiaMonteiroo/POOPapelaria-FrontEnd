@@ -1,6 +1,6 @@
 <template>
   <section>
-    <HeaderComponent/>
+    <HeaderComponent />
 
     <!-- Conteúdo principal -->
     <div class="produtos-container">
@@ -36,7 +36,7 @@
       </div>
     </div>
 
-    <FooterComponent/>
+    <FooterComponent />
   </section>
 </template>
 
@@ -48,7 +48,7 @@ export default {
   name: 'ProdutosPage',
   components: {
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
   },
   data() {
     return {
@@ -58,15 +58,16 @@ export default {
           nome: 'Caderno Universitário - 10 Matérias',
           preco: 'R$ 29,99',
           avaliacoes: '30',
-          imagem: 'https://m.media-amazon.com/images/I/51qt5Zw+CUL._AC_SY300_SX300_.jpg'
+          imagem: 'https://m.media-amazon.com/images/I/51qt5Zw+CUL._AC_SY300_SX300_.jpg',
         },
         {
           id: 2,
           nome: 'Mochila Feminina Escolar Bolsa Faculdade Viagem Anti Furto para Notebook',
           preco: 'R$ 89,99',
           avaliacoes: '20',
-          imagem: 'https://m.media-amazon.com/images/I/61SSmqSt+OL._AC_SX679_.jpg'
+          imagem: 'https://m.media-amazon.com/images/I/61SSmqSt+OL._AC_SX679_.jpg',
         },
+
         {
           id: 3,
           nome: 'Estojo Escolar Feminino Masculino Grande Box Ziper',
@@ -172,32 +173,35 @@ export default {
           avaliacoes: '37',
           imagem: 'https://m.media-amazon.com/images/I/51wSjSZScEL.__AC_SX300_SY300_QL70_ML2_.jpg'
         },
-        {
-          id: 18,
-          nome: 'Pincel Atômico de Tinta Acrílica - 6 Unidades',
-          preco: 'R$ 27,90',
-          avaliacoes: '31',
-          imagem: 'https://m.media-amazon.com/images/I/71ZpGZoPxiL._AC_SY300_.jpg'
-        }
 
-        
+
+
+
+
+
+
+
+
+
+
+
         ],
-      searchQuery: ''
+      searchQuery: '',
     };
   },
   computed: {
     filteredProdutos() {
       const query = this.searchQuery.toLowerCase();
-      return this.produtos.filter(produto => 
+      return this.produtos.filter((produto) =>
         produto.nome.toLowerCase().includes(query)
       );
-    }
+    },
   },
   methods: {
     goToDetalhes(id) {
       this.$router.push({ name: 'DetalhesProduto', params: { produtoId: id } });
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -235,7 +239,7 @@ export default {
 
 .produtos-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 produtos por linha */
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
 
@@ -250,15 +254,15 @@ export default {
 }
 
 .produto-item:hover {
-  transform: scale(1.05); /* Efeito de zoom ao passar o mouse */
+  transform: scale(1.05);
 }
 
 .foto-container {
-  margin-bottom: 10px; /* Espaçamento abaixo da imagem */
+  margin-bottom: 10px;
 }
 
 .foto-container img {
-  width: 150px; /* Diminuindo o tamanho da imagem */
+  width: 150px;
   height: auto;
   border-radius: 10px;
 }
@@ -280,5 +284,4 @@ h3 {
   font-weight: bold;
   color: #4B0082;
 }
-
 </style>
