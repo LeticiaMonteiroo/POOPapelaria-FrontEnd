@@ -1,7 +1,7 @@
 <template> 
   <header>
     <h1 class="tituloHeader" @click="goToHome">
-      <span class="text-unb">Papelaria</span><span class= "text-Connect">Lale</span>
+      <span class="text-papelaria">Papelaria</span><span class= "text-lale">Lale</span>
     </h1> 
 
     <nav class="header-nav">
@@ -92,27 +92,22 @@ background-color: #cb6ce6;
 background-color:#DDA0DD;
 
 }
-.text-Connect{
-/* color:	#f17ea1; */
-color:beige;
+.text-lale{
+color:#fffafa;
 font-size: 36px;
 }
 
-
-/* .header-logo{
-}
- */
 .header-nav {
   display: flex;
-  justify-content: end; /* Alinha os itens do nav para a direita */
-  align-items: center; /* Centraliza verticalmente os itens */
+  justify-content: end; 
+  align-items: center; 
 }
 
 ul {
   display: flex;
   flex-direction: row;
-  gap: 50px; /* Ajusta a separação entre cada item da barra de navegação */
-  list-style-type: none; /* Remove os marcadores de lista padrão */
+  gap: 50px; 
+  list-style-type: none; 
   margin: 0;
   padding: 0;
 }
@@ -125,7 +120,7 @@ ul {
 }
 
 .header-nav-li:hover {
-  background-color: #e0e0e0;
+  background-color: #fffafa;
   border-radius: 10px;
 }
 
