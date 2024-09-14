@@ -66,11 +66,13 @@
             <input type="email" v-model="formData.contact" required>
           </div>
           <div class="form-group">
+            
+            <div class="form-buttons">
             <strong>Preço Total: R$ {{ totalPrice.toFixed(2) }}</strong>
-          </div>
-          <div class="form-buttons">
-            <button type="button" @click="closeForm">Cancelar</button>
+
             <button type="submit">Enviar Pedido</button>
+            <button type="button" @click="closeForm">Cancelar</button>
+           </div>
           </div>
         </form>
       </div>
@@ -196,7 +198,7 @@ export default {
 .service-square {
   width: 350px;
   height: 150px;
-  background-color: #ede9ee;
+  background-color: #cb6ce6;
   color: white;
   display: flex;
   align-items: center;
@@ -216,6 +218,9 @@ export default {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  border-radius: 8px;
+  /*object-fit: contain; /* Garante que a imagem seja exibida corretamente */
+
 }
 
 .service-right {
@@ -250,8 +255,9 @@ export default {
   background: white;
   padding: 20px;
   border-radius: 10px;
-  width: 90%;
-  max-width: 600px;
+  width: 100%;
+  max-width: 1000px;
+  height: 80%;
 }
 
 .form-group {
@@ -276,8 +282,9 @@ export default {
 
 .form-buttons {
   display: flex;
-  justify-content: flex-end;
-  gap: 10px;
+  justify-content: center;
+  gap: 50px;
+ 
 }
 
 .form-buttons button {
@@ -287,10 +294,12 @@ export default {
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
+  
 }
 
 .form-buttons button:hover {
   background-color: #9e1d9e;
+  
 }
 
 .thank-you-overlay {
@@ -311,6 +320,7 @@ export default {
   padding: 20px;
   border-radius: 10px;
   text-align: center;
+  width: 350px;
 }
 
 .thank-you-message button {
