@@ -1,5 +1,5 @@
 <template>
-   <div class="containerLogin">
+  <div class="containerLogin">
     <div class="left-panel">
       <h1 class="titulo">
         <span class="text-UnB">Papelaria</span><span class="text-Connect">Lale</span>

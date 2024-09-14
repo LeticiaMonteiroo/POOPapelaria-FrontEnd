@@ -23,8 +23,64 @@
             <h3>{{ item.title }}</h3>
             <p>{{ item.description }}</p>
             <p><strong>Materiais:</strong> {{ item.materials }}</p>
+            <!-- Botão para abrir o formulário -->
+            <button @click="openForm(item)">Solicitar Serviço</button>
           </div>
         </div>
+      </div>
+    </div>
+
+    <!-- Modal do formulário -->
+    <div v-if="showForm" class="modal-overlay">
+      <div class="modal-content">
+        <h3>Formulário de Solicitação - {{ selectedService.title }}</h3>
+        <form @submit.prevent="submitForm">
+          <div class="form-group">
+            <label for="quantity">Quantidade:</label>
+            <input 
+              type="number" 
+              v-model="formData.quantity" 
+              @input="updatePrice" 
+              min="1"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="material">Materiais:</label>
+            <div v-for="(material, index) in selectedService.materials.split(', ')" :key="index">
+              <input 
+                type="checkbox" 
+                :value="material" 
+                v-model="formData.materialsSelected" 
+                @change="updatePrice"
+              />
+              {{ material }}
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="serviceDescription">Descrição do Serviço:</label>
+            <textarea v-model="formData.serviceDescription" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="contact">Contato:</label>
+            <input type="email" v-model="formData.contact" required>
+          </div>
+          <div class="form-group">
+            <strong>Preço Total: R$ {{ totalPrice.toFixed(2) }}</strong>
+          </div>
+          <div class="form-buttons">
+            <button type="button" @click="closeForm">Cancelar</button>
+            <button type="submit">Enviar Pedido</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Mensagem de agradecimento -->
+    <div v-if="showMessage" class="thank-you-overlay">
+      <div class="thank-you-message">
+        <p>Muito obrigada pela confiança, entraremos em contato para confirmar sua compra!</p>
+        <button @click="closeMessage">OK</button>
       </div>
     </div>
 
@@ -164,15 +220,109 @@ export default {
 
 .service-right {
   flex: 2;
-  padding-left: 20px;
+  margin-left: 20px;
 }
 
 .service-right h3 {
-  font-size: 18px;
+  font-size: 24px;
+  color: #720372;
   margin-bottom: 10px;
 }
 
 .service-right p {
-  margin: 5px 0;
+  margin-bottom: 10px;
+}
+
+.service-right button {
+  background-color: #720372;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.service-right button:hover {
+  background-color: #9e1d9e;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 600px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input, .form-group textarea {
+  width: 100%;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.form-buttons button {
+  background-color: #720372;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.form-buttons button:hover {
+  background-color: #9e1d9e;
+}
+
+.thank-you-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.thank-you-message {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.thank-you-message button {
+  background-color: #720372;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.thank-you-message button:hover {
+  background-color: #9e1d9e;
 }
 </style>
