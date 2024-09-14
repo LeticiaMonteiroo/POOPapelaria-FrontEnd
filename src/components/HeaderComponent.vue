@@ -1,3 +1,4 @@
+
 <template> 
   <header>
     <h1 class="tituloHeader" @click="goToHome">
@@ -6,16 +7,16 @@
 
     <nav class="header-nav">
       <ul>
-        <li class="header-nav-li" @click="goToFluxo">Produtos</li>
-        <li class="header-nav-li" @click="goToDisciplinas">Tutoriais</li>
-        <li class="header-nav-li" @click="goToForum">Avaliações</li>
+        <li class="header-nav-li" @click="goToProdutos">Produtos</li>
+        <li class="header-nav-li" @click="goToTutoriais">Tutoriais</li>
+        <li class="header-nav-li" @click="goToServicos">Serviços</li>
       </ul>
     </nav>
 
     <div class="header-account-actions">
       <div v-if="user_name != null" class="header-account-view">
         <span class="header-account-view-span">{{ user_name }}</span>
-        <!-- <img class="header-account-view-img" src="../assets/account.png" @click="goToPerfil"> -->
+        <img class="header-account-view-img" src="../assets/account.png" @click="goToPerfil">
       </div>
       <div class="header-logout">
         <img class="header-logout-img" src="../assets/logout.png" @click="logoutAccount">
@@ -38,14 +39,14 @@ methods: {
   goToHome() {
     this.$router.push({ name: 'Home' });
   },
-  goToFluxo() {
-    this.$router.push({ name: 'Meu Fluxo' });
+  goToProdutos() {
+    this.$router.push({ name: 'Produtos' });
   },
-  goToDisciplinas() {
-    this.$router.push({ name: 'Disciplina' });
+  goToTutoriais() {
+    this.$router.push({ name: 'Mural' });
   },
-  goToForum() {
-    this.$router.push({ name: 'Forum' });
+  goToServicos() {
+    this.$router.push({ name: 'Servicos' });
   },
   goToPerfil() {
     this.$router.push({ name: 'Perfil', params: { user_id: localStorage.getItem('user_id') } });
@@ -61,7 +62,6 @@ methods: {
 },
 }
 </script>
-
 <style scoped> 
 header {
 background-color: #4B0082;

@@ -173,18 +173,6 @@ export default {
           avaliacoes: '37',
           imagem: 'https://m.media-amazon.com/images/I/51wSjSZScEL.__AC_SX300_SY300_QL70_ML2_.jpg'
         },
-
-
-
-
-
-
-
-
-
-
-
-
         ],
       searchQuery: '',
     };
@@ -240,7 +228,7 @@ export default {
 .produtos-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  gap: 50px;
 }
 
 .produto-item {
