@@ -55,7 +55,6 @@ export default {
           avaliacoes: '15',
           imagem: 'https://m.media-amazon.com/images/I/71Bh-44GxtL.__AC_SX300_SY300_QL70_ML2_.jpg',
         },
-        // Adicione os demais produtos aqui
         {
           id: 4,
           nome: 'Caderno Executivo Costurado Capa Dura Fitto G Cambridge Rosa 90 Gramas 80 Folhas',
@@ -216,9 +215,10 @@ footer {
 
 .produto-imagem {
   width: 100%;
-  height: 300px; /* Altura fixa para a imagem */
+  height: 400px; /* Altura fixa para a imagem */
   object-fit: cover;
   border-radius: 8px;
+  margin-left: 60px;
 }
 
 .info-container {
@@ -234,18 +234,21 @@ footer {
   color: #6a1b9a; /* Roxo escuro */
   margin-bottom: 10px;
   overflow-wrap: break-word; /* Quebra a palavra se necessário */
+  margin-left: 56px;
 }
 
 .produto-preco {
   font-size: 1.6em; /* Ajuste conforme necessário */
   color: #333;
   margin-bottom: 10px;
+  margin-left: 56px;
 }
 
 .produto-avaliacoes {
   font-size: 1.4em; /* Ajuste conforme necessário */
   color: #555;
   margin-bottom: 20px;
+  margin-left: 56px;
 }
 
 .produto-descricao {
