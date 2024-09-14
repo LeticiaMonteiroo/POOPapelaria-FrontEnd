@@ -46,11 +46,12 @@ const router = createRouter({
       component: () => import('../pages/Produtos.vue'),
       //meta: { requiresAuth: true }
     },
+
     {
-      path: '/produtos',
-      name: 'Produtos',
-      component: () => import('../pages/Produtos.vue'),
-      //meta: { requiresAuth: true }
+      path: '/produto/:produtoId',
+      name: 'DetalhesProduto',
+      component: () => import('../pages/ProdutosDetalhes.vue'),
+      props: true
     }
   ]
 })
