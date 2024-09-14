@@ -6,16 +6,16 @@
 
     <nav class="header-nav">
       <ul>
-        <li class="header-nav-li" @click="goToProdutos">Produtos</li>
-        <li class="header-nav-li" @click="goToTutoriais">Tutoriais</li>
-        <li class="header-nav-li" @click="goToServicos">Serviços</li>
+        <li class="header-nav-li" @click="goToFluxo">Produtos</li>
+        <li class="header-nav-li" @click="goToDisciplinas">Tutoriais</li>
+        <li class="header-nav-li" @click="goToForum">Avaliações</li>
       </ul>
     </nav>
 
     <div class="header-account-actions">
       <div v-if="user_name != null" class="header-account-view">
         <span class="header-account-view-span">{{ user_name }}</span>
-        <img class="header-account-view-img" src="../assets/account.png" @click="goToPerfil">
+        <!-- <img class="header-account-view-img" src="../assets/account.png" @click="goToPerfil"> -->
       </div>
       <div class="header-logout">
         <img class="header-logout-img" src="../assets/logout.png" @click="logoutAccount">
@@ -38,14 +38,14 @@ methods: {
   goToHome() {
     this.$router.push({ name: 'Home' });
   },
-  goToProdutos() {
-    this.$router.push({ name: 'Produtos' });
+  goToFluxo() {
+    this.$router.push({ name: 'Meu Fluxo' });
   },
-  goToTutoriais() {
-    this.$router.push({ name: 'Mural' });
+  goToDisciplinas() {
+    this.$router.push({ name: 'Disciplina' });
   },
-  goToServicos() {
-    this.$router.push({ name: 'Servicos' });
+  goToForum() {
+    this.$router.push({ name: 'Forum' });
   },
   goToPerfil() {
     this.$router.push({ name: 'Perfil', params: { user_id: localStorage.getItem('user_id') } });
@@ -64,7 +64,7 @@ methods: {
 
 <style scoped> 
 header {
-background-color: #720372;
+background-color: #4B0082;
 padding: 2px 50px;
 color: #cb6ce6;
 bottom: 0;
@@ -72,6 +72,7 @@ left: 0;
 display: flex;
 align-items: center;
 justify-content: space-between;
+height: 120px;
 }
 
 .tituloHeader {
@@ -88,11 +89,12 @@ background-color: #cb6ce6;
 }
 
 .header-logout-img:hover{
-background-color:#f4d016;
+background-color:#DDA0DD;
 
 }
 .text-Connect{
-color:#f4d016;
+/* color:	#f17ea1; */
+color:beige;
 font-size: 36px;
 }
 
@@ -148,8 +150,8 @@ ul {
   height: 40px;
   padding: 10px;
   cursor: pointer;
-  background-color: #cb6ce6; /* Background azul */
-  border-radius: 10px; /* Border radius para fazer cantos arredondados */
+  background-color: #cb6ce6; 
+  border-radius: 10px; 
 }
 
 .header-logout {
@@ -160,7 +162,8 @@ ul {
   height: 40px;
   padding: 10px;
   cursor: pointer;
-  background-color: #f4d016; /* Background azul */
-  border-radius: 10px; /* Border radius para fazer cantos arredondados */
+  background-color: #cb6ce6;
+  border-radius: 10px; 
 }
-</style>
+
+</style> 
