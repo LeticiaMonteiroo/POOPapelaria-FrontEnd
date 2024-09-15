@@ -62,7 +62,7 @@ export default {
         },
         {
           id: 2,
-          nome: 'Mochila Feminina Escolar Bolsa Faculdade Viagem Anti Furto para Notebook',
+          nome: 'Mochila Feminina Faculdade',
           preco: 'R$ 89,99',
           avaliacoes: '20',
           imagem: 'https://m.media-amazon.com/images/I/61SSmqSt+OL._AC_SX679_.jpg',
@@ -77,7 +77,7 @@ export default {
         },
         {
           id: 4,
-          nome: 'Caderno Executivo Costurado Capa Dura Fitto G Cambridge Rosa 90 Gramas 80 Folhas',
+          nome: 'Caderno Executivo Costurado Capa Dura',
           preco: 'R$ 35,90',
           avaliacoes: '53',
           imagem: 'https://m.media-amazon.com/images/I/51A54xjw-dL.__AC_SX300_SY300_QL70_ML2_.jpg'

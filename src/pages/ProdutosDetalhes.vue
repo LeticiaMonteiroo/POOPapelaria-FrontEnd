@@ -245,7 +245,7 @@ export default {
         },
         {
           id: 2,
-          nome: 'Mochila Feminina Escolar Bolsa Faculdade Viagem Anti Furto para Notebook',
+          nome: 'Mochila Feminina Faculdade',
           preco: 'R$ 89,99',
           avaliacoes: '20',
           imagem: 'https://m.media-amazon.com/images/I/61SSmqSt+OL._AC_SX679_.jpg',
