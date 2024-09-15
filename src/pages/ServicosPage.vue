@@ -70,7 +70,7 @@
             <div class="form-buttons">
             <strong>Preço Total: R$ {{ totalPrice.toFixed(2) }}</strong>
 
-            <button type="submit">Enviar Pedido</button>
+            <button type="submit" >Enviar Pedido</button>
             <button type="button" @click="closeForm">Cancelar</button>
            </div>
           </div>
@@ -168,16 +168,44 @@ export default {
       };
       this.totalPrice = 0.00;  // Resetando o preço ao fechar o formulário
     },
+
+
+
     submitForm() {
-      this.showForm = false;
-      this.showMessage = true;
-      this.formData = {
-        quantity: '',
-        materialsSelected: [],
-        serviceDescription: '',
-        contact: ''
-      };
-    },
+  // Verifica se pelo menos um material foi selecionado
+  if (this.formData.materialsSelected.length === 0) {
+    alert('Por favor, selecione pelo menos um material.');
+    return;
+  }
+
+  const orderData = {
+    service: this.selectedService,
+    quantity: this.formData.quantity,
+    materialsSelected: this.formData.materialsSelected,
+    serviceDescription: this.formData.serviceDescription,
+    contact: this.formData.contact,
+    totalPrice: this.totalPrice
+  };
+
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  cart.push(orderData);
+  localStorage.setItem('cart', JSON.stringify(cart));
+
+  // Redirecionar para a página do carrinho
+  this.$router.push('/carrinho');
+
+  // Fechar o formulário e mostrar mensagem
+  this.showForm = false;
+  this.showMessage = true;
+
+  this.formData = {
+    quantity: '',
+    materialsSelected: [],
+    serviceDescription: '',
+    contact: ''
+  };
+},
+
     closeMessage() {
       this.showMessage = false;
     },
