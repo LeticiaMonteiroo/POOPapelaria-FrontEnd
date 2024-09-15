@@ -32,6 +32,10 @@
               <h3>RESUMO DO PEDIDO:</h3>
               <p class="preço"><strong>Total: {{ totalCartPrice }}</strong></p>
             </div>
+
+            <div>
+              <button class="finalizar">Finalizar Compra</button>
+            </div>
           </div>
   
           <div v-else>
@@ -161,6 +165,17 @@
   
   .preço {
  margin-left: 20px;
+  }
+
+  .finalizar {
+   margin-left: 800px;
+   color: white;
+   background-color:  #4B0082;
+   width: 300px;
+   height: 60px;
+   border-radius: 10px;
+   font-weight: bold;
+   font-size: 1.4em;
   }
   </style>
   

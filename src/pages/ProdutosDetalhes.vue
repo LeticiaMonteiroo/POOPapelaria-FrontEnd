@@ -15,7 +15,8 @@
 
             <!-- Botões para comprar e adicionar ao carrinho -->
             <div class="botoes-container">
-              <button class="btn-comprar">Comprar</button>
+              <button class="btn-comprar" @click="handlePurchase">Comprar</button>
+
               <button class="btn-carrinho" @click="addToCart">Adicionar ao Carrinho</button>
             </div>
           </div>
@@ -34,7 +35,7 @@
                 <div class="texto-produto">
                     <h3>Caneta Esferográfica Compactor -JET LUX- Mentos c/4 cores</h3>
                     <p>R$ 11,99 <span>em até 3x de R$ 3,99</span></p>
-                    <button class="btn1-carrinho">Adicionar</button>
+                    <button class="btn1-carrinho" @click="addToCart">Adicionar</button>
                 </div>
 
             </li>
@@ -252,28 +253,28 @@ export default {
         },
         {
           id: 3,
-          nome: 'Estojo Escolar Feminino Masculino Grande Box Ziper',
+          nome: 'Estojo Escolar Grande',
           preco: 'R$ 33,60',
           avaliacoes: '15',
           imagem: 'https://m.media-amazon.com/images/I/71Bh-44GxtL.__AC_SX300_SY300_QL70_ML2_.jpg',
         },
         {
           id: 4,
-          nome: 'Caderno Executivo Costurado Capa Dura Fitto G Cambridge Rosa 90 Gramas 80 Folhas',
+          nome: 'Caderno Executivo Costurado Capa Dura',
           preco: 'R$ 35,90',
           avaliacoes: '53',
           imagem: 'https://m.media-amazon.com/images/I/51A54xjw-dL.__AC_SX300_SY300_QL70_ML2_.jpg',
         },
         {
           id: 5,
-          nome: 'STABILO point 88 – Caneta Ponta Fina – Estojo com 15 unidades – Em 15 cores',
+          nome: 'STABILO point 88 – 15 cores',
           preco: 'R$ 120,90',
           avaliacoes: '20',
           imagem: 'https://m.media-amazon.com/images/I/81zKoOj50SL.__AC_SX300_SY300_QL70_ML2_.jpg',
         },
         {
           id: 6,
-          nome: 'Agenda Planner 2024 - Capa Floral, 160 Páginas',
+          nome: 'Agenda Planner 2025 - Capa Floral, 160 Páginas',
           preco: 'R$ 45,90',
           avaliacoes: '35',
           imagem: 'https://m.media-amazon.com/images/I/6141U732frL.__AC_SX300_SY300_QL70_ML2_.jpg',
@@ -322,7 +323,7 @@ export default {
         },
         {
           id: 13,
-          nome: 'Caneta Esferográfica Premium - Estojo com 4 Unidades',
+          nome: 'Caneta Esferográfica Premium - 4 Unidades',
           preco: 'R$ 39,90',
           avaliacoes: '22',
           imagem: 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcRWaCrDv8Ajjks5-9TnyCr7zUZ644zqYsuuZr3USV92qoSl11SLU7D6LdJD7E_vckEzos-RRuSa_yOIz6SKP6EK95RPmU0Q1E-0rdX1iKY&usqp=CAE',
@@ -368,6 +369,13 @@ export default {
     aviso.classList.add('hidden');
   },
   methods: {
+
+    handlePurchase() {
+    this.addToCart(); // Adiciona o produto ao carrinho
+    this.gotoCarrinho(); // Redireciona para a página do carrinho
+  },
+
+
     addToCart() {
       const produto = {
         id: this.produto.id,
@@ -386,8 +394,15 @@ export default {
       // Ocultar a caixa de aviso após 8 segundos
       setTimeout(() => {
         aviso.classList.add('hidden');
-      }, 4000); // Aumentado para 8 segundos
+      }, 4000); 
+
+      
     },
+
+    gotoCarrinho() {
+    this.$router.push({ name: 'Carrinho' });
+  },
+
   },
 };
 
