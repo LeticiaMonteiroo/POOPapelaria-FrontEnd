@@ -70,7 +70,7 @@
             <div class="form-buttons">
             <strong>Preço Total: R$ {{ totalPrice.toFixed(2) }}</strong>
 
-            <button type="submit">Enviar Pedido</button>
+            <button type="submit" >Enviar Pedido</button>
             <button type="button" @click="closeForm">Cancelar</button>
            </div>
           </div>
@@ -140,6 +140,73 @@ export default {
         }
       ]
     };
+  },
+
+  methods: {
+    openForm(service) {
+      this.selectedService = service;
+      this.showForm = true;
+      this.totalPrice = 0.00;  // Resetando o preço ao abrir o formulário
+    },
+    closeForm() {
+      this.showForm = false;
+      this.formData = {
+        quantity: '',
+        materialsSelected: [],
+        serviceDescription: '',
+        contact: ''
+      };
+      this.totalPrice = 0.00;  // Resetando o preço ao fechar o formulário
+    },
+
+
+
+    submitForm() {
+  // Verifica se pelo menos um material foi selecionado
+  if (this.formData.materialsSelected.length === 0) {
+    alert('Por favor, selecione pelo menos um material.');
+    return;
+  }
+
+  const orderData = {
+    service: this.selectedService,
+    quantity: this.formData.quantity,
+    materialsSelected: this.formData.materialsSelected,
+    serviceDescription: this.formData.serviceDescription,
+    contact: this.formData.contact,
+    totalPrice: this.totalPrice
+  };
+
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  cart.push(orderData);
+  localStorage.setItem('cart', JSON.stringify(cart));
+
+  // Redirecionar para a página do carrinho
+  this.$router.push('/carrinho');
+
+  // Fechar o formulário e mostrar mensagem
+  this.showForm = false;
+  this.showMessage = true;
+
+  this.formData = {
+    quantity: '',
+    materialsSelected: [],
+    serviceDescription: '',
+    contact: ''
+  };
+},
+
+    closeMessage() {
+      this.showMessage = false;
+    },
+    updatePrice() {
+      const quantity = parseInt(this.formData.quantity) || 0;
+      const materialCount = this.formData.materialsSelected.length;
+      // Calcula o número de grupos de 20 itens
+      const priceIncreaseGroups = Math.floor(quantity / 20);
+      // Atualiza o preço total com base na quantidade e grupos
+      this.totalPrice = 100.00 + (priceIncreaseGroups * 50.00) + (materialCount * 90.00);
+    }
   }
 }
 </script>

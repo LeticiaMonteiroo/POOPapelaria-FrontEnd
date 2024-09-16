@@ -62,7 +62,7 @@ export default {
         },
         {
           id: 2,
-          nome: 'Mochila Feminina Escolar Bolsa Faculdade Viagem Anti Furto para Notebook',
+          nome: 'Mochila Feminina Faculdade',
           preco: 'R$ 89,99',
           avaliacoes: '20',
           imagem: 'https://m.media-amazon.com/images/I/61SSmqSt+OL._AC_SX679_.jpg',
@@ -70,28 +70,28 @@ export default {
 
         {
           id: 3,
-          nome: 'Estojo Escolar Feminino Masculino Grande Box Ziper',
+          nome: 'Estojo Escolar Grande',
           preco: 'R$ 33,60',
           avaliacoes: '15',
           imagem: 'https://m.media-amazon.com/images/I/71Bh-44GxtL.__AC_SX300_SY300_QL70_ML2_.jpg'
         },
         {
           id: 4,
-          nome: 'Caderno Executivo Costurado Capa Dura Fitto G Cambridge Rosa 90 Gramas 80 Folhas',
+          nome: 'Caderno Executivo Costurado Capa Dura',
           preco: 'R$ 35,90',
           avaliacoes: '53',
           imagem: 'https://m.media-amazon.com/images/I/51A54xjw-dL.__AC_SX300_SY300_QL70_ML2_.jpg'
         },
         {
           id: 5,
-          nome: 'STABILO point 88 – Caneta Ponta Fina – Estojo com 15 unidades – Em 15 cores',
+          nome: 'STABILO point 88 – Em 15 cores',
           preco: 'R$ 120,90',
           avaliacoes: '20',
           imagem: 'https://m.media-amazon.com/images/I/81zKoOj50SL.__AC_SX300_SY300_QL70_ML2_.jpg'
         },
         {
           id: 6,
-          nome: 'Agenda Planner 2024 - Capa Floral, 160 Páginas',
+          nome: 'Agenda Planner 2025 - Capa Floral, 160 Páginas',
           preco: 'R$ 45,90',
           avaliacoes: '35',
           imagem: 'https://m.media-amazon.com/images/I/6141U732frL.__AC_SX300_SY300_QL70_ML2_.jpg'
@@ -140,7 +140,7 @@ export default {
         },
         {
           id: 13,
-          nome: 'Caneta Esferográfica Premium - Estojo com 4 Unidades',
+          nome: 'Caneta Esferográfica Premium - 4 Unidades',
           preco: 'R$ 39,90',
           avaliacoes: '22',
           imagem: 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcRWaCrDv8Ajjks5-9TnyCr7zUZ644zqYsuuZr3USV92qoSl11SLU7D6LdJD7E_vckEzos-RRuSa_yOIz6SKP6EK95RPmU0Q1E-0rdX1iKY&usqp=CAE'
@@ -154,14 +154,14 @@ export default {
         },
         {
           id: 15,
-          nome: 'Marcador de Texto Fluorescente Stabilo Boss Pastel c/ 6 Unidades',
+          nome: 'Marcador de Texto Fluorescente Stabilo - 6 Unidades',
           preco: 'R$ 36,90',
           avaliacoes: '50',
           imagem: 'https://achalajournal.com.br/wp-content/uploads/2024/01/achala-journal-stabilo-boss-shine-kit-6.png'
         },
         {
           id: 16,
-          nome: 'Marcador Artístico Permanente Evoke Ponta Fina, Blister com 12 Unidades',
+          nome: 'Marcador Artístico Permanente Evoke - 12 Unidades',
           preco: 'R$ 55,90',
           avaliacoes: '24',
           imagem: 'https://m.media-amazon.com/images/I/81TcWQ6d9lL.__AC_SX300_SY300_QL70_ML2_.jpg'
@@ -189,6 +189,7 @@ export default {
     goToDetalhes(id) {
       this.$router.push({ name: 'DetalhesProduto', params: { produtoId: id } });
     },
+    
   },
 };
 </script>

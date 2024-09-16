@@ -13,15 +13,22 @@
       </ul>
     </nav>
 
+    <div class="header-logout">
+        <img class="header-logout-img" src="../assets/Carrinho.png" @click="gotoCarrinho">
+      </div>
+
     <div class="header-account-actions">
       <div v-if="user_name != null" class="header-account-view">
         <span class="header-account-view-span">{{ user_name }}</span>
         <img class="header-account-view-img" src="../assets/account.png" @click="goToPerfil">
       </div>
+
       <div class="header-logout">
         <img class="header-logout-img" src="../assets/logout.png" @click="logoutAccount">
       </div>
     </div>
+
+  
   </header>
 </template>
 
@@ -51,6 +58,10 @@ methods: {
   goToPerfil() {
     this.$router.push({ name: 'Perfil', params: { user_id: localStorage.getItem('user_id') } });
   },
+  gotoCarrinho() {
+    this.$router.push({ name: 'Carrinho' });
+  },
+  
   async logoutAccount() {
     localStorage.removeItem('token');
     localStorage.removeItem('user_id');
