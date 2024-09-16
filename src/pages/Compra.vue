@@ -1,148 +1,207 @@
 <template>
   <section>
-    <HeaderComponent/>
 
-    
 
-    <FooterComponent/>
+    <div class="checkout-container">
+      <h2>Finalizar Compra</h2>
+
+      <form @submit.prevent="submitOrder">
+        <!-- Informações de Contato -->
+        <div class="form-section">
+          <h3>Informações de Contato</h3>
+          <label for="name">Nome Completo:</label>
+          <input type="text" id="name" v-model="contactInfo.name" required />
+
+          <label for="email">Email:</label>
+          <input type="email" id="email" v-model="contactInfo.email" required />
+
+          <label for="phone">Telefone:</label>
+          <input type="tel" id="phone" v-model="contactInfo.phone" required />
+        </div>
+
+        <!-- Endereço de Entrega -->
+        <div class="form-section">
+          <h3>Endereço de Entrega</h3>
+          <label for="address">Endereço:</label>
+          <input type="text" id="address" v-model="shippingAddress.address" required />
+
+          <label for="city">Cidade:</label>
+          <input type="text" id="city" v-model="shippingAddress.city" required />
+
+          <label for="state">Estado:</label>
+          <select id="state" v-model="shippingAddress.state" required>
+            <option disabled value="">Selecione um estado</option>
+            <option>SP</option>
+            <option>RJ</option>
+            <option>MG</option>
+            <option>RS</option>
+            <option>BA</option>
+            <!-- Adicione outros estados conforme necessário -->
+          </select>
+
+          <label for="zip">CEP:</label>
+          <input type="text" id="zip" v-model="shippingAddress.zip" required />
+        </div>
+
+        <!-- Método de Pagamento -->
+        <div class="form-section">
+          <h3>Método de Pagamento</h3>
+          <label for="paymentMethod">Escolha um método de pagamento:</label>
+          <select id="paymentMethod" v-model="paymentMethod" required>
+            <option disabled value="">Selecione um método</option>
+            <option>Cartão de Crédito</option>
+            <option>Cartão de Débito</option>
+            <option>Boleto</option>
+            <option>PayPal</option>
+            <!-- Adicione outros métodos conforme necessário -->
+          </select>
+
+          <div v-if="paymentMethod === 'Cartão de Crédito'">
+            <label for="cardNumber">Número do Cartão:</label>
+            <input type="text" id="cardNumber" v-model="cardInfo.cardNumber" required />
+
+            <label for="expiryDate">Data de Validade:</label>
+            <input type="text" id="expiryDate" v-model="cardInfo.expiryDate" placeholder="MM/AA" required />
+
+            <label for="cvv">CVV:</label>
+            <input type="text" id="cvv" v-model="cardInfo.cvv" required />
+          </div>
+        </div>
+
+        <button type="submit" class="submit-button">Finalizar Compra</button>
+      </form>
+
+      <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
+      <div v-if="successMessage" class="success-message">{{ successMessage }}</div>
+    </div>
+
+    <FooterComponent />
   </section>
 </template>
 
 <script>
-import axios from 'axios';
 import HeaderComponent from '../components/HeaderComponent.vue';
 import FooterComponent from '../components/FooterComponent.vue';
 
 export default {
+  name: 'CheckoutPage',
   components: {
     HeaderComponent,
     FooterComponent,
   },
   data() {
     return {
-      
+      contactInfo: {
+        name: '',
+        email: '',
+        phone: '',
+      },
+      shippingAddress: {
+        address: '',
+        city: '',
+        state: '',
+        zip: '',
+      },
+      paymentMethod: '',
+      cardInfo: {
+        cardNumber: '',
+        expiryDate: '',
+        cvv: '',
+      },
+      errorMessage: '',
+      successMessage: '',
     };
   },
-
   methods: {
-  };
+    submitOrder() {
+      // Simulação de envio de pedido
+      if (this.validateForm()) {
+        this.successMessage = 'Pedido finalizado com sucesso!';
+        this.errorMessage = '';
+        // Aqui você pode adicionar a lógica para processar o pedido
+        console.log('Pedido:', {
+          contactInfo: this.contactInfo,
+          shippingAddress: this.shippingAddress,
+          paymentMethod: this.paymentMethod,
+          cardInfo: this.cardInfo,
+        });
+      } else {
+        this.errorMessage = 'Por favor, preencha todos os campos corretamente.';
+      }
+    },
+    validateForm() {
+      // Validação básica (ainda pode ser expandida)
+      return (
+        this.contactInfo.name &&
+        this.contactInfo.email &&
+        this.contactInfo.phone &&
+        this.shippingAddress.address &&
+        this.shippingAddress.city &&
+        this.shippingAddress.state &&
+        this.shippingAddress.zip &&
+        this.paymentMethod
+      );
+    },
+  },
+};
 </script>
 
 <style scoped>
-
-.meu-fluxo-page { 
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  padding: 50px;
-}
-
-.meu-fluxo-infos{
-  margin-top: 50px;
-  margin-bottom: 100px;
-  display: flex;
-}
-
-.meu-fluxo-infos-1 {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  align-items: center;
-}
-
-.meu-fluxo-infos-2 {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  align-items: center;
-}
-
-.meu-fluxo-disciplinas-titulo {
-  font-size: 20px;
-  margin-bottom: 30px;
-  font-weight: 600;
-}
-
-.progress-container {
-  width: 500px; /* Diminuindo a largura da barra de progresso */
-  background-color: #e0e0e0;
-  border-radius: 25px;
-  margin: 20px 0;
-}
-
-.progress-bar {
-  height: 30px;
-  background-color: #4caf50;
-  border-radius: 25px;
-  text-align: right;
-  line-height: 30px;
-  color: white;
-  position: relative;
-}
-
-.progress-text {
-  font-size: 24px;
-}
-
-.info-header {
-  display: flex;
-  align-items: center;
-  padding: 20px 0;
-  border-bottom: 2px solid #e0e0e0;
-}
-
-.code {
-  font-size: 12px;
-  color: #888;
-  min-width: 70px;
-  margin-right: 10px; /* Espaçamento à direita da checkbox */
-}
-
-.discipline-name {
-  font-size: 20px;
-  color: #333;
-  margin-right: 20px;
-}
-
-.meu-fluxo-disciplina-lista {
+.checkout-container {
+  max-width: 600px;
+  margin: 20px auto;
   padding: 20px;
-  border-radius: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
 }
 
-.progress-span-porc {
-  font-weight: 500;
-  color: #0b0fdb;
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #4B0082;
 }
 
-.button-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 40px;
+.form-section {
   margin-bottom: 20px;
 }
 
-.click-button {
-  display: flex;
-  align-items: center;
-  padding: 20px 40px;
-  border: none;
-  border-radius: 50px;
-  background-color: #ffffff;
-  box-shadow: 0 0 10px rgba(0, 0, 255, 0.2);
-  cursor: pointer;
-  transition: box-shadow 0.3s ease;
-  position: relative;
-}
-
-.click-button span {
-  font-size: 18px;
+label {
+  display: block;
+  margin-bottom: 5px;
   font-weight: bold;
-  color: #091f77;
 }
 
-.click-button:hover {
-  box-shadow: 0 0 20px rgba(0, 0, 255, 0.4);
+input,
+select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4B0082;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background-color: #720372;
+}
+
+.error-message {
+  color: red;
+  text-align: center;
+}
+
+.success-message {
+  color: green;
+  text-align: center;
 }
 </style>
