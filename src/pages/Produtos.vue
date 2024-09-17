@@ -173,6 +173,16 @@ export default {
           avaliacoes: '37',
           imagem: 'https://m.media-amazon.com/images/I/51wSjSZScEL.__AC_SX300_SY300_QL70_ML2_.jpg'
         },
+
+        {
+          id: 18,
+          nome: 'Mini Grampeador Tilibra Rosa',
+          preco: 'R$ 9,50',
+          avaliacoes: '37',
+          imagem: 'https://cdnv2.moovin.com.br/marbig/imagens/produtos/original/grampeador-12-folhas-mini-com-extrator-g101-rosa-img-18519.jpg'
+        },
+
+
         ],
       searchQuery: '',
     };
