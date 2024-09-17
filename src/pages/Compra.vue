@@ -1,80 +1,61 @@
 <template>
-  <section>
-
-
-    <div class="checkout-container">
-      <h2>Finalizar Compra</h2>
-
-      <form @submit.prevent="submitOrder">
-        <!-- Informações de Contato -->
-        <div class="form-section">
-          <h3>Informações de Contato</h3>
-          <label for="name">Nome Completo:</label>
-          <input type="text" id="name" v-model="contactInfo.name" required />
-
-          <label for="email">Email:</label>
-          <input type="email" id="email" v-model="contactInfo.email" required />
-
-          <label for="phone">Telefone:</label>
-          <input type="tel" id="phone" v-model="contactInfo.phone" required />
-        </div>
-
-        <!-- Endereço de Entrega -->
-        <div class="form-section">
-          <h3>Endereço de Entrega</h3>
-          <label for="address">Endereço:</label>
-          <input type="text" id="address" v-model="shippingAddress.address" required />
-
-          <label for="city">Cidade:</label>
-          <input type="text" id="city" v-model="shippingAddress.city" required />
-
-          <label for="state">Estado:</label>
-          <select id="state" v-model="shippingAddress.state" required>
-            <option disabled value="">Selecione um estado</option>
-            <option>SP</option>
-            <option>RJ</option>
-            <option>MG</option>
-            <option>RS</option>
-            <option>BA</option>
-            <!-- Adicione outros estados conforme necessário -->
-          </select>
-
-          <label for="zip">CEP:</label>
-          <input type="text" id="zip" v-model="shippingAddress.zip" required />
-        </div>
-
-        <!-- Método de Pagamento -->
-        <div class="form-section">
-          <h3>Método de Pagamento</h3>
-          <label for="paymentMethod">Escolha um método de pagamento:</label>
-          <select id="paymentMethod" v-model="paymentMethod" required>
-            <option disabled value="">Selecione um método</option>
-            <option>Cartão de Crédito</option>
-            <option>Cartão de Débito</option>
-            <option>Boleto</option>
-            <option>PayPal</option>
-            <!-- Adicione outros métodos conforme necessário -->
-          </select>
-
-          <div v-if="paymentMethod === 'Cartão de Crédito'">
-            <label for="cardNumber">Número do Cartão:</label>
-            <input type="text" id="cardNumber" v-model="cardInfo.cardNumber" required />
-
-            <label for="expiryDate">Data de Validade:</label>
-            <input type="text" id="expiryDate" v-model="cardInfo.expiryDate" placeholder="MM/AA" required />
-
-            <label for="cvv">CVV:</label>
-            <input type="text" id="cvv" v-model="cardInfo.cvv" required />
+  <section class="checkout-container">
+    <HeaderComponent />
+    <div class="produtos-container">
+      <div class="form-container">
+        <h1>Finalizar Compra</h1>
+        <form @submit.prevent="handleSubmit">
+          <!-- Formulário de compra -->
+          <div class="form-group">
+            <label for="nome">Nome Completo:</label>
+            <input type="text" id="nome" v-model="formData.nome" required />
           </div>
-        </div>
 
-        <button type="submit" class="submit-button">Finalizar Compra</button>
-      </form>
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" v-model="formData.email" required />
+          </div>
 
-      <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
-      <div v-if="successMessage" class="success-message">{{ successMessage }}</div>
+          <div class="form-group">
+            <label for="endereco">Endereço de Entrega:</label>
+            <input type="text" id="endereco" v-model="formData.endereco" required />
+          </div>
+
+          <div class="form-group">
+            <label for="cidade">Cidade:</label>
+            <input type="text" id="cidade" v-model="formData.cidade" required />
+          </div>
+
+          <div class="form-group">
+            <label for="estado">Estado:</label>
+            <input type="text" id="estado" v-model="formData.estado" required />
+          </div>
+
+          <div class="form-group">
+            <label for="cep">CEP:</label>
+            <input type="text" id="cep" v-model="formData.cep" required />
+          </div>
+
+          <div class="form-group">
+            <label>Método de Pagamento:</label>
+            <select v-model="formData.metodoPagamento" required>
+              <option value="" disabled selected>Selecione...</option>
+              <option value="cartao">Cartão de Crédito</option>
+              <option value="boleto">Boleto Bancário</option>
+              <option value="pix">PIX</option>
+            </select>
+          </div>
+
+          <button type="submit" class="submit-button">Confirmar Compra</button>
+        </form>
+      </div>
+      <!-- Resumo do Pedido -->
+      <div class="resumo-container">
+        <h2>Resumo do Pedido</h2>
+        <p>Quantidade de Itens: {{ quantidadeItens }}</p>
+        <p>Valor Total: R$ {{ valorTotal.toFixed(2) }}</p>
+      </div>
     </div>
-
     <FooterComponent />
   </section>
 </template>
@@ -84,63 +65,62 @@ import HeaderComponent from '../components/HeaderComponent.vue';
 import FooterComponent from '../components/FooterComponent.vue';
 
 export default {
-  name: 'CheckoutPage',
+  name: 'Compra',
   components: {
     HeaderComponent,
     FooterComponent,
   },
   data() {
     return {
-      contactInfo: {
-        name: '',
+      formData: {
+        nome: '',
         email: '',
-        phone: '',
+        endereco: '',
+        cidade: '',
+        estado: '',
+        cep: '',
+        metodoPagamento: '',
       },
-      shippingAddress: {
-        address: '',
-        city: '',
-        state: '',
-        zip: '',
-      },
-      paymentMethod: '',
-      cardInfo: {
-        cardNumber: '',
-        expiryDate: '',
-        cvv: '',
-      },
-      errorMessage: '',
-      successMessage: '',
+      quantidadeItens: 0,
+      valorTotal: 0.00,
     };
   },
+  created() {
+    this.calcularResumoCarrinho();
+  },
   methods: {
-    submitOrder() {
-      // Simulação de envio de pedido
-      if (this.validateForm()) {
-        this.successMessage = 'Pedido finalizado com sucesso!';
-        this.errorMessage = '';
-        // Aqui você pode adicionar a lógica para processar o pedido
-        console.log('Pedido:', {
-          contactInfo: this.contactInfo,
-          shippingAddress: this.shippingAddress,
-          paymentMethod: this.paymentMethod,
-          cardInfo: this.cardInfo,
-        });
-      } else {
-        this.errorMessage = 'Por favor, preencha todos os campos corretamente.';
-      }
+    // Função para calcular a quantidade de itens e o valor total diretamente do localStorage
+    calcularResumoCarrinho() {
+      const carrinho = JSON.parse(localStorage.getItem('carrinho') || '[]');
+      let quantidade = 0;
+      let valor = 0.00;
+
+      carrinho.forEach(item => {
+        quantidade += item.quantidade;
+        valor += item.quantidade * item.preco;
+      });
+
+      this.quantidadeItens = quantidade;
+      this.valorTotal = valor;
+
+      console.log("Quantidade de itens:", quantidade);
+      console.log("Valor total:", valor.toFixed(2));
     },
-    validateForm() {
-      // Validação básica (ainda pode ser expandida)
-      return (
-        this.contactInfo.name &&
-        this.contactInfo.email &&
-        this.contactInfo.phone &&
-        this.shippingAddress.address &&
-        this.shippingAddress.city &&
-        this.shippingAddress.state &&
-        this.shippingAddress.zip &&
-        this.paymentMethod
-      );
+    handleSubmit() {
+      console.log('Dados do formulário:', this.formData);
+      alert('Compra confirmada!');
+      this.resetForm();
+    },
+    resetForm() {
+      this.formData = {
+        nome: '',
+        email: '',
+        endereco: '',
+        cidade: '',
+        estado: '',
+        cep: '',
+        metodoPagamento: '',
+      };
     },
   },
 };
@@ -148,60 +128,57 @@ export default {
 
 <style scoped>
 .checkout-container {
-  max-width: 600px;
-  margin: 20px auto;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-h2 {
+.produtos-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.form-container {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  max-width: 600px;
+  width: 100%;
+}
+
+.resumo-container {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 300px;
+  width: 100%;
+}
+
+h1, h2 {
   text-align: center;
   margin-bottom: 20px;
-  color: #4B0082;
 }
 
-.form-section {
-  margin-bottom: 20px;
-}
-
-label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
-}
-
-input,
-select {
-  width: 100%;
-  padding: 10px;
+p {
+  font-size: 18px;
   margin-bottom: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
 }
 
 .submit-button {
-  width: 100%;
-  padding: 10px;
   background-color: #4B0082;
   color: white;
+  padding: 15px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 16px;
+  width: 100%;
 }
 
 .submit-button:hover {
-  background-color: #720372;
-}
-
-.error-message {
-  color: red;
-  text-align: center;
-}
-
-.success-message {
-  color: green;
-  text-align: center;
+  background-color: #3c0071;
 }
 </style>

@@ -34,7 +34,7 @@
             </div>
 
             <div>
-              <button class="finalizar">Finalizar Compra</button>
+              <button class="finalizar" @click="goToCompra">Finalizar Compra</button>
             </div>
           </div>
   
@@ -77,6 +77,9 @@
       }
     },
     methods: {
+      goToCompra() {
+    this.$router.push({ name: 'Compra' });
+  },
       removeFromCart(index) {
         this.cart.splice(index, 1);
         localStorage.setItem('cart', JSON.stringify(this.cart));
