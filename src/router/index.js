@@ -48,6 +48,17 @@ const router = createRouter({
     },
 
     {
+      path: '/avaliacao',
+      name: 'Avaliacao',
+      component: () => import('../pages/Ava.vue'),
+      //meta: { requiresAuth: true }
+    },
+
+
+
+
+
+    {
       path: '/produto/:produtoId',
       name: 'DetalhesProduto',
       component: () => import('../pages/ProdutosDetalhes.vue'),

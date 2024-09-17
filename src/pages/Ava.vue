@@ -4,11 +4,11 @@
 
     <div class="criar-postagem-page">
       <form class="wrapper" @submit.prevent="handleSubmit">
-        <h3 class="criar-postagem-title">Adicionar uma postagem</h3>
+        <h3 class="criar-postagem-title">Adicionar Avaliação</h3>
 
-        <p>Nome</p>
+        <p>Título</p>
         <div class="input-box">
-          <input type="text" placeholder="Digite o nome da postagem" v-model="forumName">
+          <input type="text" placeholder="Digite um Título para a sua Avaliação" v-model="forumName">
         </div>
 
         <p>Descrição</p>
@@ -16,14 +16,22 @@
           <textarea v-model="description" cols="30" rows="5" placeholder="Deixe um comentário..."></textarea>
         </div>
 
-        <p>Link</p>
+        <p>Imagens</p>
         <div class="input-box">
-          <input type="url" placeholder="Link" v-model="forumLink">
+          <input type="file" accept="image/*" multiple @change="handleFileUpload" />
+        </div>
+
+        <div class="selected-images" v-if="selectedFiles.length > 0">
+          <h4>Imagens Selecionadas:</h4>
+          <div class="image-preview">
+            <img v-for="(file, index) in selectedFiles" :key="index" :src="URL.createObjectURL(file)" alt="Imagem selecionada" />
+          </div>
         </div>
 
         <div class="criar-postagem-buttons">
-          <button type="submit" class="btn">Enviar</button>
           <button type="button" class="btn1" @click="handleCancel">Cancelar</button>
+          <button type="submit" class="btn">Enviar</button>
+
         </div>
       </form>
     </div>
@@ -31,7 +39,7 @@
     <SuccessMessageModal
       v-if="isModalVisible"
       :show="isModalVisible"
-      message="Postagem efetuada com sucesso!!"
+      message="Avaliação Adicionada com Sucesso!!"
       @close="isModalVisible = false"
     />
 
@@ -40,8 +48,6 @@
 </template>
 
 <script>
-import axios from 'axios';
-
 import HeaderComponent from '../components/HeaderComponent.vue';
 import FooterComponent from '../components/FooterComponent.vue';
 import SuccessMessageModal from '../components/SuccessMessageModal.vue';
@@ -49,53 +55,47 @@ import SuccessMessageModal from '../components/SuccessMessageModal.vue';
 export default {
   name: 'AdicionarPost',
   components: {
-        HeaderComponent,
-        FooterComponent,
-        SuccessMessageModal
-    },
+    HeaderComponent,
+    FooterComponent,
+    SuccessMessageModal
+  },
   data() {
     return {
       isModalVisible: false,
       forumName: '',
       description: '',
-      forumLink: ''
+      forumLink: '',
+      selectedFiles: [], // Armazena os arquivos selecionados
     };
   },
   methods: {
-    sleep(ms) {
-      return new Promise(resolve => setTimeout(resolve, ms));
+    handleFileUpload(event) {
+      // Converte a lista de arquivos em um array
+      this.selectedFiles = Array.from(event.target.files);
+      console.log('Arquivos selecionados:', this.selectedFiles);
     },
-
-    async handleSubmit() {
-      // Adicione lógica para o envio do formulário
-      console.log('Formulário enviado', this.forumName, this.description, this.forumLink);
-
-      const token = localStorage.getItem('token')
-
-      await axios.post('http://localhost:8000/api/post/', {
-        title: this.forumName,
+    handleSubmit() {
+      // Adicione a lógica para enviar o formulário, incluindo as imagens selecionadas
+      console.log('Formulário enviado:', {
+        forumName: this.forumName,
         description: this.description,
-        link: this.forumLink,
-        user: localStorage.getItem('user_id')
-      }, { headers: { authorization:`Token ${token}` } });
-
-      this.isModalVisible = true
-      await this.sleep(2000);
-
-      this.$router.push({ name: 'Forum' });
+        selectedFiles: this.selectedFiles,
+      });
+      this.isModalVisible = true; // Exibe o modal de sucesso
     },
-
     handleCancel() {
-      this.$router.push({ name: 'Forum' });
+      // Limpa os campos do formulário
+      this.forumName = '';
+      this.description = '';
+      this.selectedFiles = [];
     }
-  }
+  },
 };
 </script>
 
 <style scoped>
-
 .criar-postagem-title {
-  color: #12017D;
+  color:  #4B0082;
 }
 
 .criar-postagem-page {
@@ -107,7 +107,7 @@ export default {
 .wrapper {
   margin: auto;
   width: 500px;
-  background: #ffffff;
+  background: #ee83f84f;
   color: #000;
   border-radius: 10px;
   padding: 30px 40px;
@@ -167,6 +167,23 @@ textarea {
   height: 100px;
 }
 
+.selected-images {
+  margin-top: 20px;
+}
+
+.image-preview {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.image-preview img {
+  width: 100px; /* Ajuste o tamanho conforme necessário */
+  height: 100px; /* Ajuste o tamanho conforme necessário */
+  object-fit: cover;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
 .criar-postagem-buttons {
   display: flex;
   justify-content: center;
@@ -174,7 +191,7 @@ textarea {
 }
 
 .btn {
-  background-color: #008137;
+  background-color:  #4B0082;
   color: #fff;
   height: 50px;
   width: 150px;

@@ -68,10 +68,10 @@
           <div class="form-group">
             
             <div class="form-buttons">
-            <strong>Preço Total: R$ {{ totalPrice.toFixed(2) }}</strong>
+            <strong class="preço">Preço Total: R$ {{ totalPrice.toFixed(2) }}</strong>
 
-            <button type="submit" >Enviar Pedido</button>
-            <button type="button" @click="closeForm">Cancelar</button>
+            <button type="submit" class="enviar">Enviar Pedido</button>
+            <button type="button" class="cancelar" @click="closeForm">Cancelar</button>
            </div>
           </div>
         </form>
@@ -323,12 +323,12 @@ export default {
 }
 
 .modal-content {
-  background: white;
+  background: rgb(255, 255, 255);
   padding: 20px;
   border-radius: 10px;
   width: 100%;
   max-width: 1000px;
-  height: 80%;
+  height: 90%;
 }
 
 .form-group {
@@ -405,5 +405,22 @@ export default {
 
 .thank-you-message button:hover {
   background-color: #9e1d9e;
+}
+
+.preço {
+  font-size: larger;
+  color: #161416e0;
+}
+
+.enviar {
+  height: 50px;
+  width: 160px;
+  font-size: large;
+}
+
+.cancelar {
+  height: 50px;
+  width: 150px;
+  font-size: large;
 }
 </style>

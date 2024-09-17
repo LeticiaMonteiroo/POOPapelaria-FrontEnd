@@ -150,7 +150,7 @@
           <!-- Formulário de Avaliação -->
           <div class="formulario-avaliacao">
             <h3 class="formulario-avaliacao2">Já Comprou esse produto? Deixe sua avaliação</h3>
-            <button type="submit" class="formulario-avaliacao3">Enviar Avaliação</button>
+            <button type="submit" class="formulario-avaliacao3" @click="gotoAvaliacao">Enviar Avaliação</button>
           </div>
         </div>
       </section>
@@ -402,6 +402,11 @@ export default {
     gotoCarrinho() {
     this.$router.push({ name: 'Carrinho' });
   },
+
+  gotoAvaliacao() {
+    this.$router.push({ name: 'Avaliacao' });
+  },
+
 
   },
 };
